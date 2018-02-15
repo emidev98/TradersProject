@@ -1,0 +1,95 @@
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+build/
+target/
+api/src/main/java/
+api/src/main/resources/
+impl/yuicompressor.jar
+changebundle.txt
+dependencies
+build.properties
+*.class
+*.jar
+*.jsfdia
+/dist/
+/dependencies/
+/jsf-demo/dist/
+/jsf-tools/build/
+/jsf-tools/target/
+/build.properties
+.settings/
+.classpath
+.project
+test/**/.classpath
+test/**/.project
+spi/**/.classpath
+spi/**/.project
+impl/**/.classpath
+impl/**/.project
+impl/bnd.bnd
+api/**/.classpath
+api/**/.project
+/nbproject/private/
+/dependencies
+glassfish-8.0/
+nbactions.xml
+/test/javaee8/passthrough/nb-configuration.xml
+*.DS_Store
+Mojarra.iml
+*~
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools 
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
