@@ -1,0 +1,145 @@
+= Persistència en BDR-BDOR-BDOO
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+:icons: font
+ifdef::backend-pdf[:notitle:]
+
+<<<
+
+= Persistència en BDR-BDOR-BDOO
+
+== Projecte
+
+Volem fer una aplicació que es connecti amb la base de dades `traders` i que
+permeti la creació de nous mercaders i la seva història.
+
+=== Part 1: Creació d'un mercader
+
+Podrem introduir les dades d'un nou mercader (nom, cognom i malnom). Introduirem
+també la data en què el mercader comença la seva activitat (una data entre el
+2200 i el 2500).
+
+Aquesta data no es guarda a la base de dades, però serà la data d'inici de la
+primera estada.
+
+=== Part 2: Elecció d'un planeta inicial
+
+Podrem seleccionar un sistema i un dels planetes del sistema. Aquesta vista
+es reutilitzarà després per triar cadascun dels destins posteriors.
+
+Amb les dades del planeta i del mercader ja podem crear la primera estada (sense
+data de sortida).
+
+=== Part 3: Elecció d'un planeta de destí
+
+A partir de la vista de l'apartat anterior, podem demanar a l'usuari un planeta
+de destí i una data de sortida (que ha de ser posterior a la data d'inici).
+
+Amb això podem completar la primera estada i crear la segona estada.
+
+El programa haurà de calcular la durada del viatge. Per fer-ho utilitza la
+fórmula següent:
+
+[source]
+----
+durada = d·365·2·r1 + r2
+----
+
+On:
+
+- _durada_ és el temps que es tarda a fer el viatge, en dies.
+- _d_ és la distància entre els dos sistemes solars.
+- _r1_ és un nombre real aleatori entre 0,9 i 1,1.
+- _r2_ és un nombre enter aleatori 1 i 99.
+
+=== Part 4: Viatges
+
+Ara permetrem que els diferents viatges es vagin encadenant.
+
+L'usuari podrà crear tants viatges com vulgui, fins que opti per retirar el
+mercader, o fins que la data sobrepassi l'1 de gener de 2500.
+
+Si succeeix això últim, es completarà l'última estada amb la data elegida,
+però ja no es crearà una nova estada.
+
+Més endavant ampliarem les accions que cal dur a terme quan es retira un
+mercader.
+
+=== Part 5: Adquisició de naus
+
+Durant una estada, l'usuari pot triar l'acció d'adquirir una nova nau en una
+certa data.
+
+En aquest cas, el programa mostrarà una llista amb totes les naus disponibles
+(és a dir, que no tenen cap propietari en aquell moment) i el seu preu base.
+
+El preu base d'una nau es calcula segons la següent fórmula:
+
+[source]
+----
+preuBase = preuPerTipus · capacitat
+----
+
+On:
+
+- _preuPerTipus_ és un nombre que depèn del tipus de nau, segons la taula
+següent.
+- _capacitat_ és la capacitat de càrrega de la nau.
+
+[width="60%", options="header"]
+|===
+|Tipus |Preu
+|Cargo ship |100
+|Figther |5000
+|Spaceship |1000
+|Battlecruiser |250
+|Battleship |500
+|Spacecruiser |100
+|Altres tipus |300
+|===
+
+L'usuari podrà triar la forma com s'ha adquirit la nau (per exemple,
+_Bought_, _Inherited_, _Stolen_) i el preu real que li ha costat al mercader.
+
+=== Part 6: Nau inicial
+
+Aprofitant la feina feta a l'apartat anterior, podem afegir a la creació d'un
+nou mercader que se li hagi d'assignar una nau inicial.
+
+La data d'adquisició de la nau és la mateixa que la data d'activació del
+mercader, i l'única restricció sobre el punt anterior és que la nau ha de ser
+de tipus _Cargo ship_ obligatòriament.
+
+=== Part 7: Pèrdua de naus
+
+De forma similar a l'apartat d'adquisició de naus, l'usuari pot triar que en
+una certa data el mercader perdi alguna de les naus que té.
+
+Cal tenir en compte que, a diferència del que passa amb l'adquisició de noves
+naus, la pèrdua d'una nau es pot produir en una estada o durant un viatge.
+
+L'usuari veurà una llista amb les naus del mercader i el seu preu base i podrà
+triar el motiu de la pèrdua i el benefici econòmic que en fa el mercader.
+
+Un mercader no es pot quedar sense cap nau.
+
+=== Part 8: Pèrdua de totes les naus
+
+Quan un mercader es retira, ha de perdre totes les seves naus.
+
+L'usuari triarà els motius i possible benefici en cada cas. La data d'aquestes
+últimes pèrdues serà la mateixa que la data de retirada del mercader.
+
+=== Part 9: Consulta de preus
+
+L'usuari ha de tenir una opció que li permeti consultar el preu de les
+mercaderies en qualsevol data, fins i tot dates futures.
+
+L'usuari ha de poder triar una mercaderia i veure el preu d'aquesta mercaderia
+a tots els llocs on es troba disponible. També ha de poder triar un planeta i
+veure el preu de totes les mercaderies que es venen en aquell planeta.
