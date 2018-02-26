@@ -7,3 +7,11 @@ Volem fer una aplicació que es connecti amb la base de dades `traders` i que pe
 - [Project](https://gitlab.com/eharastasan/TradersProject/blob/master/project.adoc)
 
 Per importar el projecte utilitzem Eclipse amb Maven i importem un maven project.
+
+```SQL
+MariaDB [(none)]> source traders.sql
+MariaDB [traders]> CREATE USER 'frankii'@'localhost' IDENTIFIED BY '1234';
+MariaDB [traders]> GRANT ALL PRIVILEGES ON traders.* TO 'frankii'@'localhost';
+```
+
+RUN ON SERVER test.xhtml
