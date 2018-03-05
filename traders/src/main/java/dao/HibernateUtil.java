@@ -3,7 +3,7 @@ package dao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import sakila_online.Customer;
+import model.Trader;
 
 public class HibernateUtil {
 	private static HibernateUtil instance = new HibernateUtil();
@@ -12,7 +12,7 @@ public class HibernateUtil {
 	private HibernateUtil() {
 		sessionFactory = new Configuration()
 			.configure("hibernate.cfg.xml")
-			.addAnnotatedClass(Customer.class)
+			.addAnnotatedClass(Trader.class)
 			.buildSessionFactory();
 	}
 	

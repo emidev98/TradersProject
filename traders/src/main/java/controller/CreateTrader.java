@@ -11,28 +11,27 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import dao.HibernateUtil;
-import sakila_online.Customer;
+import model.Trader;
 
 @ManagedBean
 @ViewScoped
-public class CustomerController {
-	public String byId(Customer customerPattern) {
+public class CreateTrader {
+	public String create(Trader trader) {
 		try {
-			int id = customerPattern.getId();
 			SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 			Session session = factory.getCurrentSession();
 			session.beginTransaction();
-			Customer customer = session.get(Customer.class, id);
+
 			session.getTransaction().commit();
 			
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
-			Map<String, Object> requestMap = externalContext.getRequestMap();
-			requestMap.put("customer", customer);	
+//			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
+//			Map<String, Object> requestMap = externalContext.getRequestMap();
+//			requestMap.put("customer", customer);	
 			
 		} catch (Exception exc) {
 			return null;
 		}
 				
-		return "response.xhtml";
+		return "choseplanet.xhtml";
 	}
 }

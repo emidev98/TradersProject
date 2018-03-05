@@ -6,7 +6,7 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
         <property name="hibernate.connection.password">1234</property>
-        <property name="hibernate.connection.url">jdbc:mariadb://127.0.0.1/sakila</property>
+        <property name="hibernate.connection.url">jdbc:mariadb://127.0.0.1/traders</property>
         <property name="hibernate.connection.username">frankii</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MariaDB53Dialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
