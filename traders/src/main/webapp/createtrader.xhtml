@@ -2,75 +2,48 @@
 <html lang="en"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:c="http://xmlns.jcp.org/jsf/core"
-    xmlns:f="http://xmlns.jcp.org/jsf/facelets">
-    
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	
     <h:head>
         <title>Traders</title>
-        <style>
-        		#createTraderForm{
-		       		display: grid;
-				    grid-template-columns: 1fr 1fr 1fr;
-				    grid-template-rows: 1fr 1fr 1fr;
-				}
-				#first_name{
-					grid-column: 1;
-					grid-row: 1;
-				}
-				
-				#last_name{
-					grid-column: 1;
-					grid-row: 3;
-				}
-				
-				#nickname{
-					grid-column: 1;
-					grid-row: 3;
-				}
-				#first_name_error{
-					grid-column: 2;
-					grid-row: 1;
-        			color:red
-				}
-				
-				#last_name_error{
-					grid-column: 2;
-					grid-row: 3;
-        			color:red
-				}
-				
-				#nickname_error{
-					grid-column: 2;
-					grid-row: 3;
-				}
-        </style>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.png']}"/>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'/>
+		<h:outputStylesheet library="css" name="create_trader.css"/>
     </h:head>
 	<h:body>
-		<h1>Create new trader</h1>
-		<h:form id="createTraderFrom">
-			<h:inputText value="#{trader.firstName}"
-				id="first_name"
-				f:placeholder="First Name"
-				required="true"
-				requiredMessage="First name is required">
-			</h:inputText>
-			<h:inputText value="#{trader.lastName}"
-				id="last_name"
-				f:placeholder="Last Name"
-				required="true"
-				requiredMessage="Last name is required">
-			</h:inputText>
-			<h:inputText value="#{trader.nickname}"
-				id="nickname"
-				f:placeholder="Nickname"
-				required="true"
-				requiredMessage="Nickname is required.">
-			</h:inputText>
-			<br/>
-			<h:message for="first_name" styleId="first_name_error" />
-			<h:message for="last_name" styleId="last_name_error" />
-			<h:message for="nickname" styleId="nickname_error" />
-			<br/><br/>
-			<h:commandButton value="Create" action="#{createTrader.create(trader)}" />
-		</h:form>
+		<div class="page-wrapper">
+			<div class="new-trader">
+				<h1 class="trader-title">New trader</h1>
+				<h:form id="create-trader-form">
+					<h:inputText value="#{trader.firstName}"
+						id="first-name"
+						class="first-name"
+						p:placeholder="First Name"
+						required="true"
+						requiredMessage="First name is required.">
+					</h:inputText>
+					<h:inputText value="#{trader.lastName}"
+						id="last-name"
+						class="last-name"
+						p:placeholder="Last Name"
+						required="true"
+						requiredMessage="Last name is required.">
+					</h:inputText>
+					<h:inputText value="#{trader.nickname}"
+						id="nickname"
+						class="nickname"
+						p:placeholder="Nickname"
+						required="true"
+						requiredMessage="Nickname is required.">
+					</h:inputText>
+					<br/>
+					<h:message for="first-name" class="first-name error" />
+					<h:message for="last-name" class="last-name error"/>
+					<h:message for="nickname" class="nickname error"/>
+					<br/><br/>
+					<h:commandButton class="create-trader" value="Create" action="#{createTrader.create(trader)}" />
+				</h:form>
+			</div>
+		</div>
 	</h:body>
 </html>
