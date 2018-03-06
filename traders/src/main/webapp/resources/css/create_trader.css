@@ -3,7 +3,7 @@ body{
 	background-image: url("img/trader-background.jpg");
 	font-family: Roboto !important;
     background-color: black;
-    
+    box-shadow: inset 0px 0px 106px 70px rgba(0,0,0,0.2);
 }
 
 .page-wrapper{
@@ -102,6 +102,62 @@ body{
     background: #eaeaea;
     
 }
+
+@media (max-width: 700px) {
+	.new-trader{
+		margin: 2em;
+	}
+	.new-trader #create-trader-form{
+	    grid-template-columns: 1fr;
+	    grid-template-rows: 2em 1em 2em 1em 2em 1em 2em;
+		grid-column-gap: 1em;
+		grid-row-gap: 1em;
+		
+	}
+	
+	.new-trader #create-trader-form .first-name{
+		grid-column: 1;
+		grid-row: 1;
+		
+	}
+	
+	.new-trader #create-trader-form .first-name.error{
+		grid-column: 1;
+		grid-row: 2;
+		
+	}
+	
+	
+	.new-trader #create-trader-form .last-name{
+		grid-column: 1;
+		grid-row: 3;
+		
+	}
+	
+	.new-trader #create-trader-form .last-name.error{
+		grid-column: 1;
+		grid-row: 4;
+	}
+	
+	
+	.new-trader #create-trader-form .nickname{
+		grid-column: 1;
+		grid-row: 5;
+	}
+	
+	.new-trader #create-trader-form .nickname.error{
+		grid-column: 1;
+		grid-row: 6;
+		
+	}
+	
+	.new-trader #create-trader-form .create-trader{
+		grid-column: 1;
+		grid-row: 7;
+		
+	}
+}
+
 
 
 
