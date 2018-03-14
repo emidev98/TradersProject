@@ -15,10 +15,11 @@
 			<div class="chose-planet">
 				<h1 class="title">Choose planet</h1>
 				
-				<h:selectManyCheckbox value="#{choseplanet.solarSystems}" var="solarSystem">
-					<li>#{{solarSystem.name}}</li>
-					<!-- <c:selectItem itemValue="#{solarSystem.id}" itemLabel="#{solarSystem.name}" /> -->
-				</h:selectManyCheckbox>
+			<ul>
+				<f:repeat value="#{choseplanet.solarSystems}" var="solarSystem" >
+					<li>#{solarSystem}</li>
+				</f:repeat>
+			</ul>
 			</div>
 		</div>
 	</h:body>

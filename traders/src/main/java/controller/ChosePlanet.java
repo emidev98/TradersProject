@@ -12,8 +12,8 @@ import model.SolarSystem;
 @ViewScoped
 public class ChosePlanet {
 	
-	private List<SolarSystem> solarSystems = null;
-	private List<Planet> planets = null;
+	public List<SolarSystem> solarSystems = null;
+	public List<Planet> planets = null;
 	
 	public ChosePlanet() {
 		solarSystems = SolarSystem.getAllSolarSystems();	
