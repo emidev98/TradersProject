@@ -6,20 +6,20 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import model.Planet;
-import model.SolarSystems;
+import model.SolarSystem;
 
 @ManagedBean
 @ViewScoped
 public class ChosePlanet {
 	
-	private List<SolarSystems> solarSystems = null;
+	private List<SolarSystem> solarSystems = null;
 	private List<Planet> planets = null;
 	
 	public ChosePlanet() {
-		solarSystems = SolarSystems.getAllSolarSystems();	
+		solarSystems = SolarSystem.getAllSolarSystems();	
 	}
 	
-	public void getPlanets(SolarSystems solarSystem) {
+	public void getPlanets(SolarSystem solarSystem) {
 		System.out.println(solarSystem.toString());
 	}
 	

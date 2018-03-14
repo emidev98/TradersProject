@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.Session;
@@ -20,7 +22,7 @@ import dao.HibernateUtil;
 @SessionScoped
 @Entity
 @Table(name = "SolarSystems")
-public class SolarSystems {
+public class SolarSystem {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id")
@@ -32,7 +34,10 @@ public class SolarSystems {
 	@Column(name = "Name")
 	private String name;
 	
-	public SolarSystems() {
+	@OneToMany(mappedBy="systemId", cascade={CascadeType.ALL})
+	private List<Planet> planets;
+	
+	public SolarSystem() {
 		;
 	}
 
@@ -59,17 +64,25 @@ public class SolarSystems {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public List<Planet> getPlanets() {
+		return planets;
+	}
+
+	public void setPlanets(List<Planet> planets) {
+		this.planets = planets;
+	}
 
 	@Override
 	public String toString() {
-		return "SolarSystem [id=" + id + ", code=" + code + ", name=" + name + "]";
+		return "SolarSystem [id=" + id + ", code=" + code + ", name=" + name + ", planets=" + planets + "]";
 	}
-	
-	public static List<SolarSystems> getAllSolarSystems() {
+
+	public static List<SolarSystem> getAllSolarSystems() {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		List<SolarSystems> solarSystems = session.createQuery("from SolarSystems").getResultList();
+		List<SolarSystem> solarSystems = session.createQuery("from SolarSystems").getResultList();
 		session.getTransaction().commit();
 		return solarSystems;
 	}
