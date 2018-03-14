@@ -20,7 +20,7 @@ import dao.HibernateUtil;
 @SessionScoped
 @Entity
 @Table(name = "SolarSystems")
-public class SolarSystems {
+public class SolarSystem {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id")
@@ -32,7 +32,7 @@ public class SolarSystems {
 	@Column(name = "Name")
 	private String name;
 	
-	public SolarSystems() {
+	public SolarSystem() {
 		;
 	}
 
@@ -65,11 +65,11 @@ public class SolarSystems {
 		return "SolarSystem [id=" + id + ", code=" + code + ", name=" + name + "]";
 	}
 	
-	public static List<SolarSystems> getAllSolarSystems() {
+	public static List<SolarSystem> getAllSolarSystems() {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		List<SolarSystems> solarSystems = session.createQuery("from SolarSystems").getResultList();
+		List<SolarSystem> solarSystems = session.createQuery("from SolarSystems").getResultList();
 		session.getTransaction().commit();
 		return solarSystems;
 	}
