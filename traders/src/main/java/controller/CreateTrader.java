@@ -9,6 +9,7 @@ import model.Trader;
 @ManagedBean
 @ViewScoped
 public class CreateTrader {
+	
 	public String create(Trader trader) {
 		try {
 			trader.saveTrader();	
@@ -18,4 +19,5 @@ public class CreateTrader {
 			
 		return "choseplanet.xhtml";
 	}
+	
 }
