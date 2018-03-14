@@ -2,10 +2,13 @@ package model;
 
 import java.sql.SQLException;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,7 +30,8 @@ public class Planet {
 	@Column(name = "Position")
 	private int position;
 	
-	@Column(name = "SystemId")
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="SystemId")
 	private int systemId;
 	
 	@Column(name = "AverageDistance")
