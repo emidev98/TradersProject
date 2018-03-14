@@ -39,6 +39,8 @@ public class Trader {
 	@Column(name = "DefunctDate")
 	private LocalDate defunctDate;
 	
+	private LocalDate startDate;
+	
 	public Trader() {
 		;
 	}
@@ -79,8 +81,12 @@ public class Trader {
 		return id;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+	
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
 	@Override
