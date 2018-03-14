@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
