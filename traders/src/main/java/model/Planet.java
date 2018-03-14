@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -101,5 +102,14 @@ public class Planet {
 		session.beginTransaction();
 		session.save(this);
 		session.getTransaction().commit();
+	}
+	
+	public static List<Planet> getAllPlanets(){
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		List<Planet> planets = session.createQuery("from Planets").getResultList();
+		session.getTransaction().commit();
+		return planets;
 	}
 }
