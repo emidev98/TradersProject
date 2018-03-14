@@ -65,7 +65,7 @@ public class SolarSystems {
 		return "SolarSystem [id=" + id + ", code=" + code + ", name=" + name + "]";
 	}
 	
-	public List<SolarSystems> getAllSolarSystems() {
+	public static List<SolarSystems> getAllSolarSystems() {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
