@@ -13,11 +13,17 @@
 		<div class="page-wrapper">
 			<div class="chose-planet">
 				<h1 class="title">Choose planet</h1>
-				<h:selectOneRadio value="#{attendee.chosedSolarSystem}">
-					<c:selectItems value="#{chosePlanet.solarSystems}" var="solarSystem"
-	               		itemLabel="#{solarSystem.name}" itemValue="#{solarSystem}" />
-				</h:selectOneRadio>
+				<h:form>
+					<h:selectOneRadio value="#{chosePlanet.selectedSolarSystem}">
+						<c:selectItems value="#{chosePlanet.solarSystems}" var="solarSystem"
+			              		itemLabel="#{solarSystem.name}" itemValue="#{solarSystem}" />
+					</h:selectOneRadio>
+					<h:commandButton value="Chose Solar System">
+				    	<c:ajax execute="selectedSolarSystem" render="planets" />
+				    </h:commandButton>
+				</h:form>
 			</div>
+		<h:outputText id="planets" value = "#{chosePlanet.planets}"/>
 		</div>
 	</h:body>
 </html>
