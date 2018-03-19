@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class SolarSystem {
 	@Column(name = "Name")
 	private String name;
 	
-	@OneToMany(mappedBy="systemId", cascade={CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="systemId", cascade={CascadeType.ALL})
 	private List<Planet> planets;
 	
 	public SolarSystem() {
@@ -82,6 +83,7 @@ public class SolarSystem {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
+		@SuppressWarnings("unchecked")
 		List<SolarSystem> solarSystems = session.createQuery("from SolarSystems").getResultList();
 		session.getTransaction().commit();
 		return solarSystems;
