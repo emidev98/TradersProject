@@ -13,12 +13,10 @@
 		<div class="page-wrapper">
 			<div class="chose-planet">
 				<h1 class="title">Choose planet</h1>
-				
-			<ul>
-				<f:repeat value="#{chosePlanet.solarSystems}" var="solarSystem">
-					<li>#{solarSystem}</li>
-				</f:repeat>
-			</ul>
+				<h:selectOneRadio value="#{attendee.chosedSolarSystem}">
+					<c:selectItems value="#{chosePlanet.solarSystems}" var="solarSystem"
+	               		itemLabel="#{solarSystem.name}" itemValue="#{solarSystem}" />
+				</h:selectOneRadio>
 			</div>
 		</div>
 	</h:body>

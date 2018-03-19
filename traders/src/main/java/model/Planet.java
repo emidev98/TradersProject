@@ -41,7 +41,7 @@ public class Planet {
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="SystemId")
-	private int systemId;
+	private SolarSystem system;
 	
 	@Column(name = "AverageDistance")
 	private float averageDistance;
@@ -82,12 +82,12 @@ public class Planet {
 		this.position = position;
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public SolarSystem getSystem() {
+		return system;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setSystem(SolarSystem solarSystem) {
+		this.system = solarSystem;
 	}
 
 	public float getAverageDistance() {
@@ -101,7 +101,7 @@ public class Planet {
 	@Override
 	public String toString() {
 		return "Planet [id=" + id + ", Code=" + code + ", Name=" + name + ", Position=" + position
-				+ ", SystemId=" + systemId + ", Average Distance=" + averageDistance + "]";
+			 + ", Average Distance=" + averageDistance + "]";
 	}
 	
 	public void savePlanet() throws SQLException{

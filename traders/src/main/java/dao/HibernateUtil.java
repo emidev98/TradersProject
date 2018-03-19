@@ -16,7 +16,7 @@ public class HibernateUtil {
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(Trader.class)
 			.addAnnotatedClass(SolarSystem.class)
-//			.addAnnotatedClass(Planet.class)
+			.addAnnotatedClass(Planet.class)
 			.buildSessionFactory();
 	}
 	

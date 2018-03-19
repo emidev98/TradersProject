@@ -35,7 +35,7 @@ public class SolarSystem {
 	@Column(name = "Name")
 	private String name;
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="systemId", cascade={CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="system", cascade={CascadeType.ALL})
 	private List<Planet> planets;
 	
 	public SolarSystem() {
