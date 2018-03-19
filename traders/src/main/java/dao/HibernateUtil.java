@@ -3,6 +3,8 @@ package dao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import model.Planet;
+import model.SolarSystem;
 import model.Trader;
 
 public class HibernateUtil {
@@ -13,6 +15,8 @@ public class HibernateUtil {
 		sessionFactory = new Configuration()
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(Trader.class)
+			.addAnnotatedClass(SolarSystem.class)
+//			.addAnnotatedClass(Planet.class)
 			.buildSessionFactory();
 	}
 	

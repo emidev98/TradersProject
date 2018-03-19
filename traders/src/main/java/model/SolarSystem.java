@@ -84,7 +84,7 @@ public class SolarSystem {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		List<SolarSystem> solarSystems = session.createQuery("from SolarSystems").getResultList();
+		List<SolarSystem> solarSystems = session.createQuery("from SolarSystem").getResultList();
 		session.getTransaction().commit();
 		return solarSystems;
 	}

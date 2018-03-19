@@ -12,11 +12,15 @@ import model.SolarSystem;
 @ViewScoped
 public class ChosePlanet {
 	
-	public List<SolarSystem> solarSystems = null;
-	public List<Planet> planets = null;
+	private List<SolarSystem> solarSystems = null;
+	private List<Planet> planets = null;
 	
 	public ChosePlanet() {
-		solarSystems = SolarSystem.getAllSolarSystems();	
+		solarSystems = SolarSystem.getAllSolarSystems();
+	}
+	
+	public List<SolarSystem> getSolarSystems() {
+		return solarSystems;
 	}
 	
 	public void getPlanets(SolarSystem solarSystem) {

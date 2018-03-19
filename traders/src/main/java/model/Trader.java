@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,6 +40,7 @@ public class Trader {
 	@Column(name = "DefunctDate")
 	private LocalDate defunctDate;
 	
+	@Transient
 	private LocalDate startDate;
 	
 	public Trader() {

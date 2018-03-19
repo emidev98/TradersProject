@@ -6,7 +6,6 @@
 	
     <h:head>
         <title>Traders</title>
-        <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.png']}"/>
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'/>
 		<h:outputStylesheet library="css" name="chose_planet.css"/>
     </h:head>
@@ -16,7 +15,7 @@
 				<h1 class="title">Choose planet</h1>
 				
 			<ul>
-				<f:repeat value="#{choseplanet.solarSystems}" var="solarSystem" >
+				<f:repeat value="#{chosePlanet.solarSystems}" var="solarSystem">
 					<li>#{solarSystem}</li>
 				</f:repeat>
 			</ul>
