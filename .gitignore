@@ -65,7 +65,7 @@ local.properties
 # CDT-specific (C/C++ Development Tooling)
 .cproject
 
-# CDT- autotools 
+# CDT- autotools
 .autotools
 
 # Java annotation processor (APT)
@@ -94,3 +94,7 @@ local.properties
 .scala_dependencies
 .worksheet
 /.gradle/
+
+# HibernateCFG
+
+hibernate.cfg.xml
