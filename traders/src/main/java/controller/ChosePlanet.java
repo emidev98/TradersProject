@@ -15,10 +15,20 @@ public class ChosePlanet {
 	private List<SolarSystem> solarSystems = null;
 	private List<Planet> planets = null;
 	private SolarSystem selectedSolarSystem = null;
+	private Planet selectedPlanet = null;
 	
+
+	public Planet getSelectedPlanet() {
+		return selectedPlanet;
+	}
+
+	public void setSelectedPlanet(Planet selectedPlanet) {
+		this.selectedPlanet = selectedPlanet;
+	}
 
 	public ChosePlanet() {
 		solarSystems = SolarSystem.getAllSolarSystems();
+		System.out.println(solarSystems);
 	}
 	
 	public void setSolarSystems(List<SolarSystem> solarSystems) {

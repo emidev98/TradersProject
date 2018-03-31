@@ -15,8 +15,7 @@
 				<h1 class="title">Choose planet</h1>
 				<h:form>
 					<h:selectOneRadio id="solarSystemsToSelect" value="#{chosePlanet.selectedSolarSystem}">
-						<c:selectItems id="solarSystemsSelect"
-										var="selectedSolarSystem"
+						<c:selectItems var="selectedSolarSystem"
 										value="#{chosePlanet.solarSystems}"
 			              				itemLabel="#{selectedSolarSystem.name}" 
 			              				itemValue="#{selectedSolarSystem}"/>
@@ -24,6 +23,15 @@
 			            		execute="solarSystemsToSelect"
 			            		render="planets"></c:ajax>
 					</h:selectOneRadio>
+					<!-- <h:selectOneRadio id="planetToSelect" value="#{chosePlanet.planet}">
+						<c:selectItems var="selectedPlanet"
+										value="#{chosePlanet.planets}"
+			              				itemLabel="#{selectedPlanet.name}" 
+			              				itemValue="#{selectedPlanet}"/>
+			            <c:ajax event="valueChange"
+			            		execute="solarSystemsToSelect"
+			            		render="planets"></c:ajax>
+					</h:selectOneRadio> -->
 				</h:form>
 			</div>
 		<h:outputText id="planets" value="#{chosePlanet.planets}"></h:outputText>
