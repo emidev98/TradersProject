@@ -2,14 +2,18 @@ package model;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,6 +46,9 @@ public class Trader {
 	
 	@Transient
 	private LocalDate startDate;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="trader", cascade={CascadeType.ALL})
+	private List<Stay> stays;
 	
 	public Trader() {
 		;
