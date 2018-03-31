@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import javax.faces.bean.ManagedBean;
@@ -12,8 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import dao.HibernateUtil;
 
 @ManagedBean
 @SessionScoped
@@ -40,5 +45,11 @@ public class Stay {
 	@JoinColumn(name = "PlanetId")
 	private Planet planet;
 	
-	
+	public void saveStay() throws SQLException{
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.save(this);
+		session.getTransaction().commit();
+	}
 }
