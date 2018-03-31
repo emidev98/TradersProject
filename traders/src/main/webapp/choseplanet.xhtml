@@ -14,16 +14,19 @@
 			<div class="chose-planet">
 				<h1 class="title">Choose planet</h1>
 				<h:form>
-					<h:selectOneRadio value="#{chosePlanet.selectedSolarSystem}">
-						<c:selectItems value="#{chosePlanet.solarSystems}" var="solarSystem"
-			              		itemLabel="#{solarSystem.name}" itemValue="#{solarSystem}" />
+					<h:selectOneRadio id="solarSystemsToSelect" value="#{chosePlanet.selectedSolarSystem}">
+						<c:selectItems id="solarSystemsSelect"
+										var="selectedSolarSystem"
+										value="#{chosePlanet.solarSystems}"
+			              				itemLabel="#{selectedSolarSystem.name}" 
+			              				itemValue="#{selectedSolarSystem}"/>
+			            <c:ajax event="valueChange"
+			            		execute="solarSystemsToSelect"
+			            		render="planets"></c:ajax>
 					</h:selectOneRadio>
-					<h:commandButton value="Chose Solar System">
-				    	<c:ajax execute="selectedSolarSystem" render="planets" />
-				    </h:commandButton>
 				</h:form>
 			</div>
-		<h:outputText id="planets" value = "#{chosePlanet.planets}"/>
+		<h:outputText id="planets" value="#{chosePlanet.planets}"></h:outputText>
 		</div>
 	</h:body>
 </html>
