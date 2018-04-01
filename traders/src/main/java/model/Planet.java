@@ -134,7 +134,8 @@ public class Planet {
 		}
 		List<SolarSystemsDistance> distances = session.createQuery("from SolarSystemsDistances where system1 = " + tinyId + " and system2 = " + bigId).getResultList();
 		session.getTransaction().commit();
-		return ((distances.get(0).getDistance() * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
+		distance = ((distances.get(0).getDistance() * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
+		return distance;
 	}
 	
 	public static List<Planet> getAllPlanets(){
