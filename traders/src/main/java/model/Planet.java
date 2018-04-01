@@ -2,6 +2,7 @@ package model;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -115,6 +116,25 @@ public class Planet {
 		session.beginTransaction();
 		session.save(this);
 		session.getTransaction().commit();
+	}
+	
+	public double getDistance(Planet planet) {
+		double distance = 0;
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		int tinyId = 0;
+		int bigId = 0;
+		if (this.getId() < planet.getId()) {
+			tinyId = this.getId();
+			bigId = planet.getId();
+		} else {
+			tinyId = planet.getId();
+			bigId = this.getId();
+		}
+		List<SolarSystemsDistance> distances = session.createQuery("from SolarSystemsDistances where system1 = " + tinyId + " and system2 = " + bigId).getResultList();
+		session.getTransaction().commit();
+		return ((distances.get(0).getDistance() * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
 	}
 	
 	public static List<Planet> getAllPlanets(){
