@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import model.Planet;
+import model.Ship;
 import model.SolarSystem;
 import model.Trader;
 import model.Stay;
@@ -21,6 +22,7 @@ public class HibernateUtil {
 			.addAnnotatedClass(SolarSystemsDistance.class)
 			.addAnnotatedClass(Stay.class)
 			.addAnnotatedClass(Planet.class)
+			.addAnnotatedClass(Ship.class)
 			.buildSessionFactory();
 	}
 	
