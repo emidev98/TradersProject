@@ -2,7 +2,8 @@
 <html lang="en"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:c="http://xmlns.jcp.org/jsf/core"
-	xmlns:f="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:f="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j">
 	
     <h:head>
         <title>Traders</title>
@@ -11,30 +12,32 @@
     </h:head>
 	<h:body>
 		<div class="page-wrapper">
-			<div class="chose-planet">
+			<h:form class="chose-planet">
 				<h1 class="title">Choose planet</h1>
-				<h:form>
-					<h:selectOneRadio id="solarSystemsToSelect" value="#{chosePlanet.selectedSolarSystem}">
-						<c:selectItems var="selectedSolarSystem"
-										value="#{chosePlanet.solarSystems}"
-			              				itemLabel="#{selectedSolarSystem.name}" 
-			              				itemValue="#{selectedSolarSystem}"/>
-<!-- 			            <c:ajax event="valueChange"
-			            		execute="solarSystemsToSelect"
-			            		render="planets"></c:ajax> -->
-					</h:selectOneRadio>
-					<!-- <h:selectOneRadio id="planetToSelect" value="#{chosePlanet.planet}">
-						<c:selectItems var="selectedPlanet"
-										value="#{chosePlanet.planets}"
-			              				itemLabel="#{selectedPlanet.name}" 
-			              				itemValue="#{selectedPlanet}"/>
-			            <c:ajax event="valueChange"
-			            		execute="solarSystemsToSelect"
-			            		render="planets"></c:ajax>
-					</h:selectOneRadio> -->
-				</h:form>
-			</div>
-		<h:outputText id="planets" value="#{chosePlanet.planets}"></h:outputText>
+				
+				<h:selectOneRadio id="solarSystemsToSelect" 
+								value="#{chosePlanet.selectedSolarSystem}"
+								immediate="true">
+					<c:selectItems var="selectedSolarSystem"
+									value="#{chosePlanet.solarSystems}"
+		              				itemLabel="#{selectedSolarSystem.name}"
+		              				itemValue="#{selectedSolarSystem}"/>
+					<c:ajax execute="@this" listener="#{chosePlanet.setSolarSystem}"/>
+		        </h:selectOneRadio>
+		        
+		        <h:commandButton id="chose-planet" value="Chose">
+		        	<c:ajax execute="solarSystemToSelect" 
+				        	listener="#{chosePlanet.retrivePlanets}"
+				        	render="planetToSelect"/>
+		        </h:commandButton>
+		        
+				<h:selectOneRadio id="planetToSelect" value="#{chosePlanet.selectedPlanet}">
+					<c:selectItems var="selectedPlanet"
+									value="#{chosePlanet.planets}"
+		              				itemLabel="#{selectedPlanet.name}"
+		              				itemValue="#{selectedPlanet}"/>
+				</h:selectOneRadio>
+			</h:form>
 		</div>
 	</h:body>
 </html>
