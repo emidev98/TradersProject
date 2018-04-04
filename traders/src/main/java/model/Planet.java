@@ -118,8 +118,8 @@ public class Planet {
 		session.getTransaction().commit();
 	}
 	
-	public double getDistance(Planet planet) {
-		double distance = 0;
+	public int getTime(Planet planet) {
+		int time = 0;
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
@@ -135,8 +135,8 @@ public class Planet {
 		@SuppressWarnings("unchecked")
 		List<SolarSystemsDistance> distances = session.createQuery("from SolarSystemsDistance where system1 = " + tinyId + " and system2 = " + bigId).getResultList();
 		session.getTransaction().commit();
-		distance = ((distances.get(0).getDistance() * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
-		return distance;
+		time = (int) ((distances.get(0).getDistance() * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
+		return time;
 	}
 	
 	public static List<Planet> getAllPlanets(){
