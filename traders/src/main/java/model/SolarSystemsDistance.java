@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @ManagedBean
@@ -25,17 +26,12 @@ public class SolarSystemsDistance {
 	@Column(name = "Id")
 	private int id;
 	
-	//TODO: Preguntar al joan sobre aixo
-	@ManyToMany(fetch=FetchType.LAZY,
-			cascade= {CascadeType.ALL})
-	@JoinTable(name="SolarSystemsDistances", joinColumns=@JoinColumn(name="Id"),
-			inverseJoinColumns=@JoinColumn(name="SolarSystemId1"))
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="SystemId1")
 	private SolarSystem system1;
 	
-	@ManyToMany(fetch=FetchType.LAZY,
-			cascade= {CascadeType.ALL})
-	@JoinTable(name="SolarSystemsDistances", joinColumns=@JoinColumn(name="Id"),
-			inverseJoinColumns=@JoinColumn(name="SolarSystemId2"))
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="SystemId2")
 	private SolarSystem system2;
 	
 	@Column(name = "Distance")
