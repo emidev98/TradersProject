@@ -78,7 +78,17 @@ public class SolarSystem {
 	public String toString() {
 		return "SolarSystem [id=" + id + ", code=" + code + ", name=" + name + ", planets=" + planets + "]";
 	}
-
+	
+	public static SolarSystem getSolarSystemById(int id) {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.beginTransaction();
+		SolarSystem solarSystem = session.get(SolarSystem.class, id);
+		session.getTransaction().commit();
+		return solarSystem;
+	}
+	
 	public static List<SolarSystem> getAllSolarSystems() {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
