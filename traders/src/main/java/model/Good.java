@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,6 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import dao.HibernateUtil;
 
 @ManagedBean
 @SessionScoped
@@ -42,9 +49,35 @@ public class Good {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Map<Planet, Double> getPrices(){
+	public Map<Planet, Double> getPrices(LocalDate date){
 		TreeMap<Planet, Double> prices = new TreeMap<>();
-		
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<PriceChange> priceChanges = session.createQuery("from PriceChanges pc "
+				+ "WHERE pc.GoodId = " + this.getId() 
+				+ " AND pc.Date = ( "
+					+ "SELECT MAX(pcs.Date)"
+						+ " FROM PriceChanges pcs"
+						+ " WHERE pcs.GoodId = " + this.getId()
+						+ " AND pcs.PlanetId = pc.PlanetId"
+						+ " AND pcs.Date <= \"" + date.toString() + "\");").getResultList();
+		session.getTransaction().commit();
+		for (PriceChange pc: priceChanges) {
+			prices.put(pc.getPlanet(), pc.getNewPrice());
+		}
 		return prices;
 	}
+	/*
+	 * SELECT *
+	 * 	FROM PriceChanges pc
+	 * 	WHERE pc.GoodId = 1
+	 * 	AND pc.Date = (
+	 * 		SELECT MAX(pcs.Date)
+	 * 			FROM PriceChanges pcs
+	 * 			WHERE pcs.GoodId = 1
+	 * 			AND pcs.PlanetId = pc.PlanetId
+	 * 			AND pcs.Date <= "2216-05-01");
+	 */
 }
