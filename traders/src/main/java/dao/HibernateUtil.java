@@ -10,7 +10,6 @@ import model.Ship;
 import model.SolarSystem;
 import model.Stay;
 import model.Trader;
-import model.Stay;
 import model.SolarSystemsDistance;
 
 public class HibernateUtil {
