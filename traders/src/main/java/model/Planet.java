@@ -118,6 +118,11 @@ public class Planet {
 		session.getTransaction().commit();
 	}
 	
+	/**
+	 * Returns the time it takes to travel from one planet to another.
+	 * @param planet The planet to travel
+	 * @return The time it takes (In days)
+	 */
 	public int getTime(Planet planet) {
 		int time = 0;
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
