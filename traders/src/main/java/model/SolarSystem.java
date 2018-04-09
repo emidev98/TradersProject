@@ -83,7 +83,6 @@ public class SolarSystem {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		session.beginTransaction();
 		SolarSystem solarSystem = session.get(SolarSystem.class, id);
 		session.getTransaction().commit();
 		return solarSystem;
