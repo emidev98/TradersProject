@@ -43,6 +43,7 @@ public class ChosePlanet implements Serializable {
 	}
 
 	public void setSolarSystem(SolarSystem solarSystem) {
+		System.out.println("PENE");
 		this.solarSystem = solarSystem;
 	}
 	

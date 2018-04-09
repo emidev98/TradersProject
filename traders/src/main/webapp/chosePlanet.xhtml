@@ -14,9 +14,13 @@
 			<h:form class="chose-planet">	
 			<h1 class="title">Choose planet</h1>
 	            <p:selectOneMenu id="solarsystemm" 
+	            		immediate="true"
 	            		value="#{chosePlanet.solarSystem}"
 	            		converter="solarSystemConverter">
-        			<p:ajax listener="#{chosePlanet.onSolarSystemChange}" update="planett" />
+        			<p:ajax process="solarsystemm"
+        					event="change" 
+        					listener="#{chosePlanet.onSolarSystemChange}" 
+        					update="planett" />
 	                <f:selectItems value="#{chosePlanet.solarSystems}"
 	                			var="solarSystemmm"
 	                			itemValue="#{solarSystemmm.id}"
