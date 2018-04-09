@@ -3,7 +3,9 @@ package dao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import model.Good;
 import model.Planet;
+import model.PriceChange;
 import model.Ship;
 import model.SolarSystem;
 import model.Stay;
@@ -24,6 +26,8 @@ public class HibernateUtil {
 			.addAnnotatedClass(Stay.class)
 			.addAnnotatedClass(Planet.class)
 			.addAnnotatedClass(Ship.class)
+			.addAnnotatedClass(Good.class)
+			.addAnnotatedClass(PriceChange.class)
 			.buildSessionFactory();
 	}
 	
