@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import model.Planet;
 import model.Ship;
 import model.SolarSystem;
+import model.Stay;
 import model.Trader;
 import model.Stay;
 import model.SolarSystemsDistance;
