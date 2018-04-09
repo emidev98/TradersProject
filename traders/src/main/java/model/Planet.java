@@ -1,7 +1,10 @@
 package model;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.faces.bean.ManagedBean;
@@ -144,6 +147,15 @@ public class Planet {
 		return time;
 	}
 	
+	public static Planet getPlanetById(int id) {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		Planet planet = session.get(Planet.class, id);
+		session.getTransaction().commit();
+		return planet;
+	}
+	
 	public static List<Planet> getAllPlanets(){
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
@@ -153,4 +165,35 @@ public class Planet {
 		session.getTransaction().commit();
 		return planets;
 	}
+	
+	public Map<Good, Double> getGoods(LocalDate date){
+		TreeMap<Good, Double> goods = new TreeMap<>();
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<PriceChange> priceChanges = session.createQuery("from PriceChange pc "
+				+ "WHERE pc.PlanetId = " + this.getId() 
+				+ " AND pc.Date = ( "
+					+ "SELECT MAX(pcs.Date)"
+						+ " FROM PriceChange pcs"
+						+ " WHERE pcs.PlanetId = " + this.getId()
+						+ " AND pcs.GoodId = pc.GoodId"
+						+ " AND pcs.Date <= \"" + date.toString() + "\");").getResultList();
+		session.getTransaction().commit();
+		for (PriceChange pc: priceChanges) {
+			goods.put(pc.getGood(), pc.getNewPrice());
+		}
+		return goods;
+	}
+	/*SELECT * 
+    *	FROM PriceChanges pc 
+    *	WHERE pc.PlanetId = 1 AND pc.Date = (
+    *		SELECT MAX(pcs.Date)
+    *		FROM PriceChanges pcs
+    *		WHERE pcs.PlanetId = 1
+    *		AND pc.GoodId = pcs.GoodId
+    *		AND pcs.Date <= "2208-05-01"
+	*	);
+	*/
 }

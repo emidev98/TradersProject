@@ -119,7 +119,7 @@ public class Ship {
 		session.beginTransaction();
 		List<Ship> availableShip = null;
 		availableShip = session.createQuery(
-					"FROM ships "
+					"FROM Ship "
 				+ "WHERE Id NOT IN ("
 				+ "SELECT ShipId FROM shipowners WHERE AdquisitionDate <= '"+date.toString()+"');").getResultList();
 		session.getTransaction().commit();
