@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
+import javax.faces.event.AjaxBehaviorEvent;
 import model.Planet;
 import model.SolarSystem;
 
@@ -17,11 +17,35 @@ public class ChosePlanet implements Serializable {
 	private List<Planet> planets;
 	private SolarSystem solarSystem;
 	private Planet planet;
+	private String solarSystemId;
+	private String planetId;
 	
+	public void onSolarSystemChange(AjaxBehaviorEvent event) {
+    	int id = Integer.parseInt(solarSystemId);
+    	solarSystem = SolarSystem.getSolarSystemById(id);
+    	planets = solarSystem.getPlanets();
+	}
+	
+	public void createStay() {
+    	int planetID = Integer.parseInt(planetId);
+    	int solarSystemID = Integer.parseInt(solarSystemId);
+    	System.out.println(planetID + " " + solarSystemID);
+	}
+	
+	// Getters, Setters and Constructor
+
 	public ChosePlanet() {
 		solarSystems = SolarSystem.getAllSolarSystems();
 	}
 	
+	public String getSolarSystemId() {
+		return solarSystemId;
+	}
+
+	public void setSolarSystemId(String solarSystemId) {
+		this.solarSystemId = solarSystemId;
+	}
+
 	public List<SolarSystem> getSolarSystems() {
 		return solarSystems;
 	}
@@ -43,7 +67,6 @@ public class ChosePlanet implements Serializable {
 	}
 
 	public void setSolarSystem(SolarSystem solarSystem) {
-		System.out.println("PENE");
 		this.solarSystem = solarSystem;
 	}
 	
@@ -54,9 +77,12 @@ public class ChosePlanet implements Serializable {
 	public void setPlanet(Planet planet) {
 		this.planet = planet;
 	}
-	
-	public void onSolarSystemChange() {
-		System.out.println("solarSystemChange");
-		planets = solarSystem.getPlanets();
+
+	public String getPlanetId() {
+		return planetId;
+	}
+
+	public void setPlanetId(String planetId) {
+		this.planetId = planetId;
 	}
 }

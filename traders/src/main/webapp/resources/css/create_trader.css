@@ -1,18 +1,8 @@
 body{
-	margin: 0;
 	background-image: url("img/trader-background.jpg");
-	font-family: Roboto !important;
-    background-color: black;
-    box-shadow: inset 0px 0px 106px 70px rgba(0,0,0,0.2);
 }
 
-.page-wrapper{
-	height: 100vh;
-	display: flex;
-    align-items: center;
-    justify-content: center;
-	
-}
+
 
 .new-trader{
 	background-color: rgba(255,255,255,0.9);
@@ -87,20 +77,10 @@ body{
     align-self: center;
 }
 
-.new-trader #create-trader-form .create-trader{
+.new-trader .create-trader-button{
 	grid-column: 3;
 	grid-row: 2;
-	border: 0;
-    background: white;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-	cursor:pointer;
-	border-radius: 2px;
 	
-}
-
-.new-trader #create-trader-form .create-trader:hover{
-    background: #eaeaea;
-    
 }
 
 @media (max-width: 700px) {
