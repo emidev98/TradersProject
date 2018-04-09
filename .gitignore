@@ -97,4 +97,4 @@ local.properties
 
 # HibernateCFG
 
-traders/src/main/java/hibernate.cfg.xml
+# traders/src/main/java/hibernate.cfg.xml
