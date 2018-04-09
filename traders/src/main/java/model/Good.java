@@ -55,11 +55,11 @@ public class Good {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		List<PriceChange> priceChanges = session.createQuery("from PriceChanges pc "
+		List<PriceChange> priceChanges = session.createQuery("from PriceChange pc "
 				+ "WHERE pc.GoodId = " + this.getId() 
 				+ " AND pc.Date = ( "
 					+ "SELECT MAX(pcs.Date)"
-						+ " FROM PriceChanges pcs"
+						+ " FROM PriceChange pcs"
 						+ " WHERE pcs.GoodId = " + this.getId()
 						+ " AND pcs.PlanetId = pc.PlanetId"
 						+ " AND pcs.Date <= \"" + date.toString() + "\");").getResultList();
