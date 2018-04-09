@@ -22,11 +22,6 @@ public class ChosePlanet implements Serializable {
 		solarSystems = SolarSystem.getAllSolarSystems();
 	}
 	
-	public void onSolarSystemChange() {
-		System.out.println("solarSystemChange");
-		planets = solarSystem.getPlanets();
-	}
-	
 	public List<SolarSystem> getSolarSystems() {
 		return solarSystems;
 	}
@@ -50,12 +45,17 @@ public class ChosePlanet implements Serializable {
 	public void setSolarSystem(SolarSystem solarSystem) {
 		this.solarSystem = solarSystem;
 	}
-
+	
 	public Planet getPlanet() {
 		return planet;
 	}
 
 	public void setPlanet(Planet planet) {
 		this.planet = planet;
+	}
+	
+	public void onSolarSystemChange() {
+		System.out.println("solarSystemChange");
+		planets = solarSystem.getPlanets();
 	}
 }

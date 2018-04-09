@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -23,7 +24,9 @@ import dao.HibernateUtil;
 @SessionScoped
 @Entity
 @Table(name = "SolarSystems")
-public class SolarSystem {
+public class SolarSystem implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id")
