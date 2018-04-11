@@ -41,7 +41,9 @@
 							prime:placeholder="Birth"
 							required="true"
 							requiredMessage="Birth date is required."
-							value="#{trader.startDate}" />
+							value="#{trader.startDate}"
+							mindate="2200"
+							maxdate="2500"/>
 					<h:message for="first-name" class="first-name error" />
 					<h:message for="last-name" class="last-name error"/>
 					<h:message for="nickname" class="nickname error"/>
