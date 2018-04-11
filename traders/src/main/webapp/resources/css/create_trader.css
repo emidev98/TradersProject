@@ -23,7 +23,7 @@ body{
 .new-trader #create-trader-form{
 	display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 2em 2em 2em;
+    grid-template-rows: 2em 2em 2em 2em;
 	grid-column-gap: 1em;
 	grid-row-gap: 1em;
 	
@@ -44,6 +44,20 @@ body{
 .new-trader #create-trader-form .nickname{
 	grid-column: 1;
 	grid-row: 3;
+}
+
+.new-trader #create-trader-form .start-date{
+	grid-column: 1;
+	grid-row: 4;
+	display: flex;
+
+}
+
+.new-trader #create-trader-form .start-date input{
+	flex-grow:1;
+	font-size: 1em;
+    font-weight: bold;
+	
 }
 
 .new-trader #create-trader-form input{    
