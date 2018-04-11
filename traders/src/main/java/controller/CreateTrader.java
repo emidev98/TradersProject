@@ -22,7 +22,6 @@ public class CreateTrader {
 		} catch(SQLException e) {
 			
 		}
-			
 		return "choseplanet.xhtml";
 	}
 
