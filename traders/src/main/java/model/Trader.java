@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -42,10 +42,10 @@ public class Trader {
 	private String lastName;
 	
 	@Column(name = "DefunctDate")
-	private LocalDate defunctDate;
+	private Date defunctDate;
 	
 	@Transient
-	private LocalDate startDate;
+	private Date startDate;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="trader", cascade={CascadeType.ALL})
 	private List<Stay> stays;
@@ -78,11 +78,11 @@ public class Trader {
 		this.lastName = lastName;
 	}
 
-	public LocalDate getDefunctDate() {
+	public Date getDefunctDate() {
 		return defunctDate;
 	}
 
-	public void setDefunctDate(LocalDate defunctDate) {
+	public void setDefunctDate(Date defunctDate) {
 		this.defunctDate = defunctDate;
 	}
 
@@ -90,11 +90,11 @@ public class Trader {
 		return id;
 	}
 	
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	
-	public LocalDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
