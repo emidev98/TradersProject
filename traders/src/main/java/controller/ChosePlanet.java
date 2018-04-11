@@ -28,8 +28,8 @@ public class ChosePlanet implements Serializable {
 	
 	public void createStay() {
     	int planetID = Integer.parseInt(planetId);
-    	int solarSystemID = Integer.parseInt(solarSystemId);
-    	System.out.println(planetID + " " + solarSystemID);
+    	Planet planet = Planet.getPlanetById(planetID);
+    	
 	}
 	
 	// Getters, Setters and Constructor
