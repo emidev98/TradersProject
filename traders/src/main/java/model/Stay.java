@@ -1,7 +1,7 @@
 package model;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,27 +25,71 @@ import dao.HibernateUtil;
 @Entity
 @Table(name = "Stays")
 public class Stay {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private int id;
-	
+
 	@Column(name = "StartDate")
-	private LocalDate startDate;
-	
-	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="TraderId")
+	private Date startDate;
+
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "TraderId")
 	private Trader trader;
-	
+
 	@Column(name = "EndDate")
-	private LocalDate endDate;
-	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	private Date endDate;
+
+	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "PlanetId")
 	private Planet planet;
-	
-	public void saveStay() throws SQLException{
+
+	public Stay() {
+		;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Trader getTrader() {
+		return trader;
+	}
+
+	public void setTrader(Trader trader) {
+		this.trader = trader;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Planet getPlanet() {
+		return planet;
+	}
+
+	public void setPlanet(Planet planet) {
+		this.planet = planet;
+	}
+
+	public void saveStay() throws SQLException {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
