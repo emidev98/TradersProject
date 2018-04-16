@@ -37,22 +37,24 @@
 		</div>
 		
 		<div class="page-content">
-			<div id="travels" class="active">
-				<ui:insert name="travels" >
-				  <ui:include src="travels.xhtml" />
-				</ui:insert>
-			</div>
-			
-			<div id="goods">
-				<ui:insert name="goods" >
-				  <ui:include src="goods.xhtml" />
-				</ui:insert>
-			</div>
-			
-			<div id="ships">
-				<ui:insert name="ships" >
-				  <ui:include src="ships.xhtml" />
-				</ui:insert>
+			<div class="content-wrapper">
+				<div id="travels" class="active">
+					<ui:insert name="travels" >
+					  <ui:include src="travels.xhtml" />
+					</ui:insert>
+				</div>
+				
+				<div id="goods">
+					<ui:insert name="goods" >
+					  <ui:include src="goods.xhtml" />
+					</ui:insert>
+				</div>
+				
+				<div id="ships">
+					<ui:insert name="ships" >
+					  <ui:include src="ships.xhtml" />
+					</ui:insert>
+				</div>
 			</div>
 		</div>
 	</h:body>
