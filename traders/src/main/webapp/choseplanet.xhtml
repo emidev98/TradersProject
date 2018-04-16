@@ -15,8 +15,9 @@
 			<h:form class="chose-planet">
 				<div class="solar-systems">
 					<h2>Select SolarSystem</h2>
-					<h:selectOneRadio id="solarsystem"
+					<h:selectOneMenu id="solarsystem"
 		            		value="#{chosePlanet.solarSystemId}">
+                		<f:selectItem itemLabel="SolarSystem" itemValue="" noSelectionOption="true" />
 	        			<p:ajax process="solarsystem"
 	        					event="change" 
 	        					listener="#{chosePlanet.onSolarSystemChange}" 
@@ -25,16 +26,17 @@
 		                			var="solarSystem"
 		                			itemValue="#{solarSystem.id}"
 		                			itemLabel="#{solarSystem.name}" />
-		            </h:selectOneRadio>
+		            </h:selectOneMenu>
 				</div>
 	            <div class="planets">
 					<h2>Select Planet</h2>
-		            <h:selectOneRadio id="planet" value="#{chosePlanet.planetId}">
+		            <h:selectOneMenu id="planet" value="#{chosePlanet.planetId}">
+               			<f:selectItem itemLabel="Planet" itemValue="" noSelectionOption="true" />
 		                <f:selectItems value="#{chosePlanet.planets}"
 		                				var="planet"
 		                				itemValue="#{planet.id}"
 		                				itemLabel="#{planet.name}"/>
-		            </h:selectOneRadio>
+		            </h:selectOneMenu>
 	            </div>
 	            <div class="create-stay">
 					<h:commandButton class="create-stay-button action-button" value="Create Stay" action="#{chosePlanet.createStay()}" />

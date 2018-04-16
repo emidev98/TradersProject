@@ -18,32 +18,11 @@ body{
 	
 }
 
-.chose-planet .solar-systems tbody tr{
-	display: flex;
-	flex-direction : column;
-	
-}
-
 /* Planets Section */
 
 .chose-planet .planets{
 	flex-grow: 1;
-	display : flex;
-	flex-direction: column;
 	
-}
-
-.chose-planet .planets tbody tr{
-	display: flex;
-	flex-direction : column;
-	
-}
-
-.chose-planet .planets table{
-	flex-grow: 1;
-    display: flex;
-    align-items: center;
-    
 }
 
 
