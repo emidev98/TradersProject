@@ -1,14 +1,55 @@
 body{
-	background-color: red;
+	background-image: url("img/main-state.jpg");
+	display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.page-menu{
+	height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-menu .menu-items{
+	display:flex;
+	justify-content:center;
 	
 }
 
-#travels, #ships, #goods{
+.page-menu .menu-items button{
+	height: 45px;
+    width: 150px;
+    padding: 0;
+    border: 1px solid gray;
+    border-radius: 1px;
+    margin: 0 1em;
+    cursor: pointer;
+    
+}
+
+.page-menu .menu-items button:focus{
+	outline : none;
+	
+}
+
+.page-content{
+	height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.page-content #travels,
+.page-content #ships,
+.page-content #goods{
 	display: none;
 	
 }
 
-.active{
+.page-content .active{
 	display: flex !important;	
 	
 }
