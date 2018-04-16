@@ -1,0 +1,13 @@
+body{
+	background-color: red;
+	
+}
+#travels, #ships, #goods{
+	display: none;
+	
+}
+
+.active{
+	display: flex !important;	
+	
+}
