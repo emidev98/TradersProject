@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.Session;
@@ -36,6 +39,9 @@ public class Ship {
 
 	@Column(name = "Capacity")
 	private int capacity;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="ship", cascade={CascadeType.ALL})
+	private List<ShipOwner> shipOwner;
 
 	public int getId() {
 		return id;
@@ -69,6 +75,16 @@ public class Ship {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+	
+	
+	public List<ShipOwner> getShipOwner() {
+		return shipOwner;
+	}
+
+	public void setShipOwner(List<ShipOwner> shipOwner) {
+		this.shipOwner = shipOwner;
+	}
+
 	@Override
 	public String toString() {
 		return "Ship [id=" + id + ", name=" + name + ", type=" + type + ", capacity=" + capacity + "]";

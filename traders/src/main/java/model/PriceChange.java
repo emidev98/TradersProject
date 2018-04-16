@@ -74,4 +74,6 @@ public class PriceChange {
 		this.newPrice = newPrice;
 	}
 	
+	
+	
 }
