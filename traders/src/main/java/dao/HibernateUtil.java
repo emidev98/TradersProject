@@ -7,6 +7,7 @@ import model.Good;
 import model.Planet;
 import model.PriceChange;
 import model.Ship;
+import model.ShipOwner;
 import model.SolarSystem;
 import model.Stay;
 import model.Trader;
@@ -27,6 +28,7 @@ public class HibernateUtil {
 			.addAnnotatedClass(Ship.class)
 			.addAnnotatedClass(Good.class)
 			.addAnnotatedClass(PriceChange.class)
+			.addAnnotatedClass(ShipOwner.class)
 			.buildSessionFactory();
 	}
 	

@@ -107,6 +107,14 @@ public class Planet {
 		this.averageDistance = averageDistance;
 	}
 	
+	public List<Stay> getStays() {
+		return stays;
+	}
+
+	public void setStays(List<Stay> stays) {
+		this.stays = stays;
+	}
+
 	@Override
 	public String toString() {
 		return "Planet [id=" + id + ", Code=" + code + ", Name=" + name + ", Position=" + position

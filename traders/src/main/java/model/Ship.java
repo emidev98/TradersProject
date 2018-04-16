@@ -1,17 +1,20 @@
 package model;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,9 +39,9 @@ public class Ship {
 
 	@Column(name = "Capacity")
 	private int capacity;
-
-	@Transient
-	private int price;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="ship", cascade={CascadeType.ALL})
+	private List<ShipOwner> shipOwner;
 
 	public int getId() {
 		return id;
@@ -61,28 +64,7 @@ public class Ship {
 	}
 
 	public void setType(String type) {
-		switch (type) {
-		case "Cargo ship":
-			setPrice(100);
-			break;
-		case "Figther":
-			setPrice(5000);
-			break;
-		case "Spaceship":
-			setPrice(1000);
-			break;
-		case "Battlecruiser":
-			setPrice(250);
-			break;
-		case "Battleship":
-			setPrice(500);
-			break;
-		case "Spacecruiser":
-			setPrice(100);
-			break;
-		default:
-			setPrice(300);
-		}
+		
 		this.type = type;
 	}
 
@@ -93,18 +75,40 @@ public class Ship {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+	
+	
+	public List<ShipOwner> getShipOwner() {
+		return shipOwner;
+	}
+
+	public void setShipOwner(List<ShipOwner> shipOwner) {
+		this.shipOwner = shipOwner;
+	}
+
 	@Override
 	public String toString() {
 		return "Ship [id=" + id + ", name=" + name + ", type=" + type + ", capacity=" + capacity + "]";
 	}
 	
 	public int getPrice() {
-		return price;
+		switch (type) {
+		case "Cargo ship":
+			return 100*this.capacity;
+		case "Figther":
+			return 5000*this.capacity;
+		case "Spaceship":
+			return 1000*this.capacity;
+		case "Battlecruiser":
+			return 250*this.capacity;
+		case "Battleship":
+			return 500*this.capacity;
+		case "Spacecruiser":
+			return 100*this.capacity;
+		default:
+			return 300*this.capacity;
+		}
 	}
 	
-	public void setPrice(int price) {
-		this.price = price;
-	}
 	
 	/**
 	 * Return all available ships from a certain date.
@@ -112,8 +116,8 @@ public class Ship {
 	 * @return The list of available ships.
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<Ship> getAvailableShips(LocalDate date){
-		//SELECT DISTINCT ships.* FROM ships WHERE ships.Id NOT IN (SELECT shipownergoodss.ShipId FROM shipowners WHERE shipowners.AdquisitionDate <= "2266-07-05");
+	public static List<Ship> getAvailableShips(Date date){
+		//SELECT DISTINCT ships.* FROM ships WHERE ships.Id NOT IN (SELECT ShipOwner.ShipId FROM ShipOwners WHERE shipowners.AdquisitionDate <= "2266-07-05" AND ShipOwners.LostBenefit LIKE 'Destroyed');
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
@@ -121,9 +125,25 @@ public class Ship {
 		availableShip = session.createQuery(
 					"FROM Ship "
 				+ "WHERE Id NOT IN ("
-				+ "SELECT ShipId FROM shipowners WHERE AdquisitionDate <= '"+date.toString()+"');").getResultList();
+				+ "SELECT ShipId FROM ShipOwners WHERE AdquisitionDate <= '"+date.toString()+"' AND ShipOwners.LostCause LIKE 'Destroyed');").getResultList();
 		session.getTransaction().commit();
 		return availableShip;
-		
+	}
+	
+	
+	/**
+	 * Filters a list of ships by Type.
+	 * @param ships
+	 * @param type
+	 * @return
+	 */
+	public static List<Ship> getShipsByType(List<Ship> ships, String type){
+		List<Ship> shipsFiltered = new ArrayList<>();
+		for(Ship actualShip : ships) {
+			if(actualShip.getType().equalsIgnoreCase(type)) {
+				shipsFiltered.add(actualShip);
+			}
+		}
+		return shipsFiltered;
 	}
 }

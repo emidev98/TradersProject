@@ -89,6 +89,8 @@ public class Stay {
 	public void setPlanet(Planet planet) {
 		this.planet = planet;
 	}
+	
+	
 
 	public void saveStay() throws SQLException {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();

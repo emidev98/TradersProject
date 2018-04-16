@@ -50,6 +50,9 @@ public class Trader {
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="trader", cascade={CascadeType.ALL})
 	private List<Stay> stays;
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="trader", cascade={CascadeType.ALL})
+	private List<ShipOwner> shipOwner;
+	
 	public Trader() {
 		;
 	}
@@ -85,6 +88,10 @@ public class Trader {
 	public void setDefunctDate(Date defunctDate) {
 		this.defunctDate = defunctDate;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
@@ -96,6 +103,22 @@ public class Trader {
 	
 	public Date getStartDate() {
 		return startDate;
+	}
+	
+	public List<Stay> getStays() {
+		return stays;
+	}
+
+	public void setStays(List<Stay> stays) {
+		this.stays = stays;
+	}
+
+	public List<ShipOwner> getShipOwner() {
+		return shipOwner;
+	}
+
+	public void setShipOwner(List<ShipOwner> shipOwner) {
+		this.shipOwner = shipOwner;
 	}
 
 	@Override
