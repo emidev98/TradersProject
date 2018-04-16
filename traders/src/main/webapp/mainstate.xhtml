@@ -1,18 +1,59 @@
 <!DOCTYPE html>
 <html lang="en"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:c="http://xmlns.jcp.org/jsf/core"
-	xmlns:prime="http://primefaces.org/ui">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:prime="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 	
     <h:head>
         <title>Traders</title>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.png']}"/>
 		<h:outputStylesheet library="css" name="common.css"/>
-		<h:outputStylesheet library="css" name="create_trader.css"/>
+		<h:outputStylesheet library="css" name="main_state.css"/>
+		<h:outputStylesheet library="css" name="ships.css"/>
+		<h:outputStylesheet library="css" name="goods.css"/>
+		<h:outputStylesheet library="css" name="travels.css"/>
+		<script type="text/javascript">
+			var actualContent = "travels";
+			function show(pageContent){
+				var element = document.getElementById(actualContent);
+				element.classList.remove("active");
+				
+				var actualElement = document.getElementById(pageContent);
+				actualElement.classList.add("active");
+				
+				actualContent = pageContent;
+				
+			}
+		</script>
     </h:head>
 	<h:body>
-		<div class="page-wrapper">
-
+		<div class="page-menu">
+			<div class="menu-items">
+				<button onclick="show('travels')">Travels</button>
+				<button onclick="show('ships')">Buy/Sell Ships</button>
+				<button onclick="show('goods')">Search goods</button>
+			</div>
+		</div>
+		
+		<div class="page-content" id="page-content">
+			<div id="travels" class="active">
+				<ui:insert name="travels" >
+				  <ui:include src="travels.xhtml" />
+				</ui:insert>
+			</div>
+			
+			<div id="goods">
+				<ui:insert name="goods" >
+				  <ui:include src="goods.xhtml" />
+				</ui:insert>
+			</div>
+			
+			<div id="ships">
+				<ui:insert name="ships" >
+				  <ui:include src="ships.xhtml" />
+				</ui:insert>
+			</div>
 		</div>
 	</h:body>
 </html>
