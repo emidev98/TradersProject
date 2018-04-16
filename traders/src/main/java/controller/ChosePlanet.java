@@ -1,12 +1,19 @@
 package controller;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import model.Planet;
 import model.SolarSystem;
+import model.Stay;
+import model.Trader;
 
 @ManagedBean
 @SessionScoped
@@ -16,7 +23,6 @@ public class ChosePlanet implements Serializable {
 	private List<SolarSystem> solarSystems;
 	private List<Planet> planets;
 	private SolarSystem solarSystem;
-	private Planet planet;
 	private String solarSystemId;
 	private String planetId;
 	
@@ -26,10 +32,23 @@ public class ChosePlanet implements Serializable {
     	planets = solarSystem.getPlanets();
 	}
 	
-	public void createStay() {
+	public String createStay() {
     	int planetID = Integer.parseInt(planetId);
     	Planet planet = Planet.getPlanetById(planetID);
-    	
+    	ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
+    	Map<String, Object> requestMap = external.getSessionMap();
+    	Trader t = (Trader) requestMap.get("trader");
+    	Stay initStay = new Stay();
+    	initStay.setPlanet(planet);
+    	initStay.setTrader(t);
+    	initStay.setStartDate(t.getStartDate());
+    	initStay.setEndDate(null);
+    	try {
+			initStay.saveStay();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return "mainstate.xhtml";
 	}
 	
 	// Getters, Setters and Constructor
@@ -68,14 +87,6 @@ public class ChosePlanet implements Serializable {
 
 	public void setSolarSystem(SolarSystem solarSystem) {
 		this.solarSystem = solarSystem;
-	}
-	
-	public Planet getPlanet() {
-		return planet;
-	}
-
-	public void setPlanet(Planet planet) {
-		this.planet = planet;
 	}
 
 	public String getPlanetId() {
