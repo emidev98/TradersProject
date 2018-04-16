@@ -28,34 +28,32 @@
 		</script>
     </h:head>
 	<h:body>
-		<div class="menu">
+		<div class="page-menu">
 			<div class="menu-items">
-				<h:commandButton value="Travels" onclick="show('travels')"/>
-				<h:commandButton value="Buy/Sell Ships" onclick="show('ships')"/>
-				<h:commandButton value="Search goods" onclick="show('goods')"/>
+				<button onclick="show('travels')">Travels</button>
+				<button onclick="show('ships')">Buy/Sell Ships</button>
+				<button onclick="show('goods')">Search goods</button>
 			</div>
 		</div>
 		
-		<div class="page-wrapper" id="page-content">
-			<h:form class="page-content">
-				<div id="travels" class="active">
-					<ui:insert name="travels" >
-					  <ui:include src="travels.xhtml" />
-					</ui:insert>
-				</div>
-				
-				<div id="goods">
-					<ui:insert name="goods" >
-					  <ui:include src="goods.xhtml" />
-					</ui:insert>
-				</div>
-				
-				<div id="ships">
-					<ui:insert name="ships" >
-					  <ui:include src="ships.xhtml" />
-					</ui:insert>
-				</div>
-			</h:form>
+		<div class="page-content" id="page-content">
+			<div id="travels" class="active">
+				<ui:insert name="travels" >
+				  <ui:include src="travels.xhtml" />
+				</ui:insert>
+			</div>
+			
+			<div id="goods">
+				<ui:insert name="goods" >
+				  <ui:include src="goods.xhtml" />
+				</ui:insert>
+			</div>
+			
+			<div id="ships">
+				<ui:insert name="ships" >
+				  <ui:include src="ships.xhtml" />
+				</ui:insert>
+			</div>
 		</div>
 	</h:body>
 </html>
