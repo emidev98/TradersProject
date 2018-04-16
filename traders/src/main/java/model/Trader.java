@@ -101,7 +101,7 @@ public class Trader {
 	@Override
 	public String toString() {
 		return "Trader [id=" + id + ", nickName=" + nickname + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", defunctDate=" + defunctDate + "]";
+				+ ", startDate=" + startDate + ", defunctDate=" + defunctDate + "]";
 	}
 	
 	public void saveTrader() throws SQLException{
