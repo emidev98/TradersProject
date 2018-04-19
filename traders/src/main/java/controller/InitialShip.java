@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,12 @@ public class InitialShip {
 		actualTrader = (Trader) requestMap.get("trader");
 		availableShips = Ship.getAvailableShips(actualTrader.getStartDate());
 		availableShips = Ship.getShipsByType(Collections.unmodifiableList(availableShips), "Cargo ship");
+	}
+	
+	public String create(Ship ship) {
+		this.choosenShip = ship;
+		
+		return "main_state.xhtml";
 	}
 
 	public List<Ship> getAvailableShips() {

@@ -20,7 +20,8 @@
 		                				var="ship"
 		                				itemValue="#{ship}"
 		                				itemLabel="#{ship.name}"/>
-		            </h:selectOneMenu>
+		        </h:selectOneMenu>
+		        <h:commandButton value="Create" action="#{initialShip.create(ship)}" />
 			</h:form>
 		</div>
 	</h:body>
