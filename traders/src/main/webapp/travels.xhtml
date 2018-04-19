@@ -3,12 +3,51 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:prime="http://primefaces.org/ui">
     <body>
 	    <ui:composition>
-	
-		<h1>This is default travels</h1>
-				
+	    	<h:form class="chose-planet-travel">
+	    		<div class="date">
+					<h2>Select date to leave</h2>
+					<prime:calendar class="start-date" 
+						prime:placeholder="Birth"
+						required="true"
+						requiredMessage="Birth date is required."
+						value="#{travels.endDate}"
+						mindate="2200"
+						maxdate="2500"/>
+				</div>			
+				<div class="solar-systems">
+					<h2>Select SolarSystem</h2>
+					<h:selectOneMenu id="solarsystem"
+		            		value="#{travels.solarSystemId}">
+                		<f:selectItem itemLabel="SolarSystem" itemValue="" noSelectionOption="true" />
+	        			<prime:ajax process="solarsystem"
+	        					event="change" 
+	        					listener="#{travels.onSolarSystemChange}" 
+	        					update="planet"/>
+		                <f:selectItems value="#{travels.solarSystems}"
+		                			var="solarSystem"
+		                			itemValue="#{solarSystem.id}"
+		                			itemLabel="#{solarSystem.name}" />
+		            </h:selectOneMenu>
+				</div>
+	            <div class="planets">
+					<h2>Select Planet</h2>
+		            <h:selectOneMenu id="planet" value="#{travels.planetId}">
+               			<f:selectItem itemLabel="Planet" itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{travels.planets}"
+		                				var="planet"
+		                				itemValue="#{planet.id}"
+		                				itemLabel="#{planet.name}"/>
+		            </h:selectOneMenu>
+	            </div>
+	            <div class="create-travel">
+					<h:commandButton class="create-travel-button action-button" value="Create Travel" action="#{travels.createTravel()}" />
+	            </div>
+			</h:form>
 	    </ui:composition>
     </body>
 </html>
