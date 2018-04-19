@@ -123,9 +123,9 @@ public class Ship {
 		session.beginTransaction();
 		List<Ship> availableShip = null;
 		availableShip = session.createQuery(
-					"FROM Ship "
-				+ "WHERE Id NOT IN ("
-				+ "SELECT ShipId FROM ShipOwners WHERE AdquisitionDate <= '"+date.toString()+"' AND ShipOwners.LostCause LIKE 'Destroyed');").getResultList();
+					"FROM Ship as ship "
+				+ "WHERE ship.id NOT IN ("
+				+ "SELECT owner.id FROM ShipOwner as owner WHERE owner.adquisitionDate <= '2268-01-01' AND owner.lostCause LIKE 'Destroyed')").getResultList();
 		session.getTransaction().commit();
 		return availableShip;
 	}

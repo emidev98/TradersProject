@@ -48,7 +48,7 @@ public class ChosePlanet implements Serializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	return "mainstate.xhtml";
+    	return "initialship.xhtml";
 	}
 	
 	// Getters, Setters and Constructor

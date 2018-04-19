@@ -30,15 +30,15 @@
 	<h:body>
 		<div class="page-menu">
 			<div class="menu-items">
-				<button onclick="show('travels')">Travels</button>
-				<button onclick="show('ships')">Ships Management</button>
+				<button onclick="show('travels')" disabled="#{mainState.disabled}">Travels</button>
+				<button onclick="show('ships')" >Ships Management</button>
 				<button onclick="show('goods')">Search goods</button>
 			</div>
 		</div>
 		
 		<div class="page-content">
 			<div class="content-wrapper">
-				<div id="travels" class="active">
+				<div id="travels">
 					<ui:insert name="travels" >
 					  <ui:include src="travels.xhtml" />
 					</ui:insert>
@@ -50,7 +50,7 @@
 					</ui:insert>
 				</div>
 				
-				<div id="ships">
+				<div id="ships" class="active">
 					<ui:insert name="ships" >
 					  <ui:include src="ships.xhtml" />
 					</ui:insert>
