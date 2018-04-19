@@ -34,6 +34,11 @@ body{
 	
 }
 
+.page-menu .menu-items button:hover{
+	background: #d2d2d2;
+	
+}
+
 .page-content{
 	height: 85vh;
     display: flex;
@@ -47,6 +52,7 @@ body{
 .page-content .content-wrapper #goods{
 	display: none;
 	height: 600px;
+	
 }
 
 .page-content .content-wrapper{
