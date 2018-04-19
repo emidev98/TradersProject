@@ -17,3 +17,6 @@
 	display: flex;
 	align-items: center;
 }
+#travels .create-travel-button {
+	padding: 1em;
+}

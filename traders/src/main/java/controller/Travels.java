@@ -3,6 +3,7 @@ package controller;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,13 +38,19 @@ public class Travels implements Serializable{
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
     	Map<String, Object> requestMap = external.getSessionMap();
     	Trader trader = (Trader) requestMap.get("trader");
-    	List<Stay> traderStays = trader.getStays();
-    	Stay lastStay = traderStays.get(traderStays.size() - 1);
+    	Stay lastStay = null;
     	Stay newStay = new Stay();
     	int planetID = Integer.parseInt(planetId);
     	Planet planet = Planet.getPlanetById(planetID);
+    	for (Stay stay: trader.getStays()) {
+    		if (stay.getEndDate() == null)
+    			lastStay = stay;
+    	}
     	lastStay.setEndDate(endDate);  	
     	newStay.setPlanet(planet);
+    	newStay.setTrader(trader);
+    	int days = lastStay.getPlanet().getTime(planet);
+    	//TODO aburrirte a pasar days a data
     	try {
 			lastStay.saveStay();
 		} catch (SQLException e) {
