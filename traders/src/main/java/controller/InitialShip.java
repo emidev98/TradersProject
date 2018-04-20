@@ -11,16 +11,17 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import model.Ship;
+import model.ShipOwner;
 import model.Trader;
 
 @ManagedBean
 @SessionScoped
 public class InitialShip {
-	private static final long serialVersionUID = 1L;
 	
 	private Trader actualTrader;
 	private List<Ship> availableShips;
 	private Ship choosenShip;
+	private String typeOfBuy;
 	
 	public InitialShip() {
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
@@ -30,10 +31,24 @@ public class InitialShip {
 		availableShips = Ship.getShipsByType(Collections.unmodifiableList(availableShips), "Cargo ship");
 	}
 	
-	public String create(Ship ship) {
-		this.choosenShip = ship;
-		
-		return "main_state.xhtml";
+	public String getShip() {
+		ShipOwner initShip = new ShipOwner();
+		initShip.setShip(choosenShip);
+		initShip.setTrader(actualTrader);
+		initShip.setAdquisitionDate(actualTrader.getStartDate());
+		int price = 0;
+		if(typeOfBuy.equalsIgnoreCase("Bought")) {
+			price = choosenShip.getPrice();
+		}
+		initShip.setAdquisitionCause(typeOfBuy);
+		initShip.setAdquisitionPrice(price);
+		System.out.println(initShip);
+		try {
+			initShip.saveShipOwner();
+		} catch (SQLException e) {
+			;
+		}
+		return "mainstate.xhtml";
 	}
 
 	public List<Ship> getAvailableShips() {
@@ -51,6 +66,15 @@ public class InitialShip {
 	public void setChoosenShip(Ship choosenShip) {
 		this.choosenShip = choosenShip;
 	}
+
+	public String getTypeOfBuy() {
+		return typeOfBuy;
+	}
+
+	public void setTypeOfBuy(String typeOfBuy) {
+		this.typeOfBuy = typeOfBuy;
+	}
+	
 	
 	
 	

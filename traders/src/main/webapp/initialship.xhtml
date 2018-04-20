@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 	
     <h:head>
         <title>Traders</title>
@@ -12,16 +11,21 @@
     </h:head>
 	<h:body>
 		<div class="page-wrapper">
+			<h1 class="ship-title">Select your first ship</h1>
 			<h:form class="initial-ship">
-				<h1 class="ship-title">Select your first ship</h1>
 				<h:selectOneMenu id="ship" value="#{initialShip.choosenShip}">
-               			<f:selectItem itemLabel="Ship" itemValue="" noSelectionOption="true" />
+	              		<f:selectItem itemLabel="Ship" itemValue="" noSelectionOption="true" />
 		                <f:selectItems value="#{initialShip.availableShips}"
 		                				var="ship"
 		                				itemValue="#{ship}"
 		                				itemLabel="#{ship.name}"/>
 		        </h:selectOneMenu>
-		        <h:commandButton value="Create" action="#{initialShip.create(ship)}" />
+		        <h:selectOneRadio value="#{initialShip.typeOfBuy}"> 
+				   <f:selectItem itemValue="Stolen" itemLabel="Stolen" /> 
+				   <f:selectItem itemValue="Inherited" itemLabel="Inherited" />
+				   <f:selectItem itemValue="Bought" itemLabel="Bought" />
+				</h:selectOneRadio>   
+		        <h:commandButton value="Get Ship" action="#{initialShip.getShip()}" />
 			</h:form>
 		</div>
 	</h:body>

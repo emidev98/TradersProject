@@ -129,7 +129,12 @@ public class ShipOwner {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return "ShipOwner [ship=" + ship + ", trader=" + trader + ", adquisitionDate=" + adquisitionDate
+				+ ", adquisitionCause=" + adquisitionCause + ", adquisitionPrice=" + adquisitionPrice + "]";
+	}
+
 	public void saveShipOwner() throws SQLException{
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
