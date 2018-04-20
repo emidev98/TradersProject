@@ -12,12 +12,15 @@
 	    		<div class="date">
 					<h2>Select date to leave</h2>
 					<prime:calendar class="start-date" 
-						prime:placeholder="Birth"
-						required="true"
-						requiredMessage="Birth date is required."
-						value="#{travels.endDate}"
-						mindate="2200"
-						maxdate="2500"/>
+							prime:placeholder="Birth"
+							required="true"
+							requiredMessage="Birth date is required."
+							value="#{trader.startDate}"
+							mindate="01/01/2200"
+							maxdate="01/01/2500"
+							pattern="MM/dd/yyyy"
+							navigator="true" 
+							yearRange="2200:2500"/>
 				</div>			
 				<div class="solar-systems">
 					<h2>Select SolarSystem</h2>

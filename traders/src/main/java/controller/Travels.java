@@ -2,8 +2,8 @@ package controller;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,9 +50,13 @@ public class Travels implements Serializable{
     	newStay.setPlanet(planet);
     	newStay.setTrader(trader);
     	int days = lastStay.getPlanet().getTime(planet);
-    	//TODO aburrirte a pasar days a data
+    	Calendar c = Calendar.getInstance();
+    	c.setTime(endDate);
+    	c.add(Calendar.DATE, days);
+    	newStay.setStartDate(c.getTime()); 
     	try {
 			lastStay.saveStay();
+			newStay.saveStay();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
