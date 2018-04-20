@@ -20,7 +20,7 @@ public class InitialShip {
 	
 	private Trader actualTrader;
 	private List<Ship> availableShips;
-	private Ship choosenShip;
+	private String choosenShip;
 	private String typeOfBuy;
 	
 	public InitialShip() {
@@ -33,6 +33,7 @@ public class InitialShip {
 	
 	public String getShip() {
 		ShipOwner initShip = new ShipOwner();
+		Ship choosenShip = Ship.getShipById(Integer.parseInt(this.choosenShip));
 		initShip.setShip(choosenShip);
 		initShip.setTrader(actualTrader);
 		initShip.setAdquisitionDate(actualTrader.getStartDate());
@@ -42,6 +43,8 @@ public class InitialShip {
 		}
 		initShip.setAdquisitionCause(typeOfBuy);
 		initShip.setAdquisitionPrice(price);
+		initShip.setLostCause("");
+		initShip.setLostBenefit(0);
 		System.out.println(initShip);
 		try {
 			initShip.saveShipOwner();
@@ -59,11 +62,11 @@ public class InitialShip {
 		this.availableShips = availableShips;
 	}
 
-	public Ship getChoosenShip() {
+	public String getChoosenShip() {
 		return choosenShip;
 	}
 
-	public void setChoosenShip(Ship choosenShip) {
+	public void setChoosenShip(String choosenShip) {
 		this.choosenShip = choosenShip;
 	}
 

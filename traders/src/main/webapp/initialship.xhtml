@@ -11,22 +11,24 @@
     </h:head>
 	<h:body>
 		<div class="page-wrapper">
-			<h1 class="ship-title">Select your first ship</h1>
-			<h:form class="initial-ship">
-				<h:selectOneMenu id="ship" value="#{initialShip.choosenShip}">
-	              		<f:selectItem itemLabel="Ship" itemValue="" noSelectionOption="true" />
-		                <f:selectItems value="#{initialShip.availableShips}"
-		                				var="ship"
-		                				itemValue="#{ship}"
-		                				itemLabel="#{ship.name}"/>
-		        </h:selectOneMenu>
-		        <h:selectOneRadio value="#{initialShip.typeOfBuy}"> 
-				   <f:selectItem itemValue="Stolen" itemLabel="Stolen" /> 
-				   <f:selectItem itemValue="Inherited" itemLabel="Inherited" />
-				   <f:selectItem itemValue="Bought" itemLabel="Bought" />
-				</h:selectOneRadio>   
-		        <h:commandButton value="Get Ship" action="#{initialShip.getShip()}" />
-			</h:form>
+			<div class="initialship-wrapper">
+				<h1 class="ship-title">Select your first ship</h1>
+				<h:form class="initial-ship">
+					<h:selectOneMenu id="ship" value="#{initialShip.choosenShip}">
+		              		<f:selectItem itemLabel="Ship" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{initialShip.availableShips}"
+			                				var="ship"
+			                				itemValue="#{ship.id}"
+			                				itemLabel="#{ship.name}"/>
+			        </h:selectOneMenu>
+			        <h:selectOneRadio value="#{initialShip.typeOfBuy}"> 
+					   <f:selectItem itemValue="Stolen" itemLabel="Stolen" /> 
+					   <f:selectItem itemValue="Inherited" itemLabel="Inherited" />
+					   <f:selectItem itemValue="Bought" itemLabel="Bought" />
+					</h:selectOneRadio>   
+			        <h:commandButton value="Get Ship" action="#{initialShip.getShip()}" />
+				</h:form>
+			</div>
 		</div>
 	</h:body>
 </html>

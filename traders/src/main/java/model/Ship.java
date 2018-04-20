@@ -109,6 +109,14 @@ public class Ship {
 		}
 	}
 	
+	public static Ship getShipById(int id) {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		Ship ship = session.get(Ship.class, id);
+		session.getTransaction().commit();
+		return ship;
+	}
 	
 	/**
 	 * Return all available ships from a certain date.
