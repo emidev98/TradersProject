@@ -139,8 +139,8 @@ public class Planet {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		int tinyId = 0;
-		int bigId = 0;
+		int tinyId = this.system.getId();
+		int bigId = planet.getSystem().getId();
 		@SuppressWarnings("unchecked")
 		List<SolarSystemsDistance> distances = session.createQuery("from SolarSystemsDistance where (system1 = " + tinyId + " and system2 = " + bigId + ") or (system1 = " + tinyId + " and system2 = " + bigId + ")").getResultList();
 		session.getTransaction().commit();
