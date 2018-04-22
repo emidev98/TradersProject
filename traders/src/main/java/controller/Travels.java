@@ -29,6 +29,7 @@ public class Travels implements Serializable{
 	private String solarSystemId;
 	private String planetId;
 	
+		
 	public void onSolarSystemChange(AjaxBehaviorEvent event) {
     	int id = Integer.parseInt(solarSystemId);
     	solarSystem = SolarSystem.getSolarSystemById(id);
@@ -55,7 +56,7 @@ public class Travels implements Serializable{
     	c.add(Calendar.DATE, days);
     	newStay.setStartDate(c.getTime()); 
     	try {
-			lastStay.saveStay();
+			lastStay.updateStay();
 			newStay.saveStay();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,6 +64,11 @@ public class Travels implements Serializable{
     	
 		return "mainstate.xhtml";
 	}
+	
+	public Travels() {
+		solarSystems = SolarSystem.getAllSolarSystems();
+	}
+	
 	public Date getEndDate() {
 		return endDate;
 	}

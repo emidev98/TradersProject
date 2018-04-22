@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class Trader {
 	private List<ShipOwner> shipOwner;
 	
 	public Trader() {
-		;
+		stays = new ArrayList<>();
 	}
 
 	public String getNickname() {

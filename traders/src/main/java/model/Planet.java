@@ -141,10 +141,15 @@ public class Planet {
 		session.beginTransaction();
 		int tinyId = this.system.getId();
 		int bigId = planet.getSystem().getId();
+		double distance;
 		@SuppressWarnings("unchecked")
 		List<SolarSystemsDistance> distances = session.createQuery("from SolarSystemsDistance where (system1 = " + tinyId + " and system2 = " + bigId + ") or (system1 = " + tinyId + " and system2 = " + bigId + ")").getResultList();
 		session.getTransaction().commit();
-		time = (int) ((distances.get(0).getDistance() * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
+		if (distances.size() == 0)
+			distance = 0;
+		else
+			distance = distances.get(0).getDistance();
+		time = (int) ((distance * 365 * 2 * (ThreadLocalRandom.current().nextDouble(0.3) + 0.9)) + (ThreadLocalRandom.current().nextInt(99) + 1));
 		return time;
 	}
 	
