@@ -42,7 +42,7 @@ public class Stay {
 	@Column(name = "EndDate")
 	private Date endDate;
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "PlanetId")
 	private Planet planet;
 

@@ -12,11 +12,11 @@
 	    		<div class="date">
 					<h2>Select date to leave</h2>
 					<p:calendar class="start-date" 
-							p:placeholder="Birth"
+							p:placeholder="Date"
 							required="true"
-							requiredMessage="Birth date is required."
+							requiredMessage="This date is required."
 							value="#{travels.endDate}"
-							mindate="01/01/2200"
+							mindate="#{travels.lastDate}"
 							maxdate="01/01/2500"
 							pattern="MM/dd/yyyy"
 							navigator="true" 

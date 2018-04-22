@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -19,7 +20,7 @@ import model.Stay;
 import model.Trader;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class Travels implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private List<SolarSystem> solarSystems;
@@ -28,6 +29,9 @@ public class Travels implements Serializable{
 	private SolarSystem solarSystem;
 	private String solarSystemId;
 	private String planetId;
+	private Date lastDate;
+	private Trader trader;
+	private Stay lastStay;
 	
 		
 	public void onSolarSystemChange(AjaxBehaviorEvent event) {
@@ -36,17 +40,9 @@ public class Travels implements Serializable{
     	planets = solarSystem.getPlanets();
 	}
 	public String createTravel() {
-		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
-    	Map<String, Object> requestMap = external.getSessionMap();
-    	Trader trader = (Trader) requestMap.get("trader");
-    	Stay lastStay = null;
-    	Stay newStay = new Stay();
+		Stay newStay = new Stay();
     	int planetID = Integer.parseInt(planetId);
     	Planet planet = Planet.getPlanetById(planetID);
-    	for (Stay stay: trader.getStays()) {
-    		if (stay.getEndDate() == null)
-    			lastStay = stay;
-    	}
     	lastStay.setEndDate(endDate);  	
     	newStay.setPlanet(planet);
     	newStay.setTrader(trader);
@@ -54,10 +50,12 @@ public class Travels implements Serializable{
     	Calendar c = Calendar.getInstance();
     	c.setTime(endDate);
     	c.add(Calendar.DATE, days);
-    	newStay.setStartDate(c.getTime()); 
+    	newStay.setStartDate(c.getTime());
+    	newStay.setEndDate(null);
+    	trader.getStays().add(newStay);
     	try {
 			lastStay.updateStay();
-			newStay.saveStay();
+			//newStay.saveStay();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -65,10 +63,32 @@ public class Travels implements Serializable{
 		return "mainstate.xhtml";
 	}
 	
-	public Travels() {
-		solarSystems = SolarSystem.getAllSolarSystems();
+	public void findTrader() {
+		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
+    	Map<String, Object> requestMap = external.getSessionMap();
+    	trader = (Trader) requestMap.get("trader");
 	}
 	
+	public void findLastStay() {
+		for (Stay stay: trader.getStays()) {
+    		if (stay.getEndDate() == null)
+    			lastStay = stay;
+    	}
+	}
+	
+	public Travels() {
+		solarSystems = SolarSystem.getAllSolarSystems();
+		findTrader();
+		findLastStay();
+		lastDate = lastStay.getStartDate();
+	}
+	
+	public Date getLastDate() {
+		return lastDate;
+	}
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
+	}
 	public Date getEndDate() {
 		return endDate;
 	}
