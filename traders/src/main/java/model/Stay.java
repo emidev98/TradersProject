@@ -42,7 +42,7 @@ public class Stay {
 	@Column(name = "EndDate")
 	private Date endDate;
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "PlanetId")
 	private Planet planet;
 
@@ -97,6 +97,14 @@ public class Stay {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		session.save(this);
+		session.getTransaction().commit();
+	}
+	
+	public void updateStay() throws SQLException {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.update(this);
 		session.getTransaction().commit();
 	}
 }

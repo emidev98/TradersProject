@@ -1,0 +1,22 @@
+#travles {
+	height: 1px;
+}
+#travels .chose-planet-travel {
+	display: flex;
+	width: 100%;
+	justify-items: center;
+	align-items: center;
+	margin: 0 1em 0 1em;
+}
+#travels .date,
+#travels .solar-systems,
+#travels .planets {
+	flex-grow: 1;
+}
+#travels .create-travel {
+	display: flex;
+	align-items: center;
+}
+#travels .create-travel-button {
+	padding: 1em;
+}
