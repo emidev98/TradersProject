@@ -3,10 +3,6 @@ body{
 	background-repeat: round;
 }
 
-.initial-ship{
-	
-}
-
 .initialship-wrapper{
 	background-color: rgba(255,255,255,0.9);
 	padding: 1em;
@@ -17,4 +13,39 @@ body{
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+}
+
+.initialship-wrapper #initial-ship-form{
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+	grid-template-rows: 2em 2em;
+	grid-column-gap: 1em;
+	grid-row-gap: 1em;
+}
+
+.initialship-wrapper #initial-ship-form .ship{
+	grid-column: 1;
+	grid-row: 1;
+}
+
+.initialship-wrapper #initial-ship-form .type-of-buy{
+	grid-column: 1;
+	grid-row: 2;
+}
+
+
+.initialship-wrapper #initial-ship-form .ship.error{
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.initialship-wrapper #initial-ship-form .type-of-buy.error{
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.initialship-wrapper #initial-ship-form .form-button{
+	grid-column: 3;
+	grid-row-start: 1;
+	grid-row-end: 3;
 }

@@ -13,20 +13,20 @@
 		<div class="page-wrapper">
 			<div class="initialship-wrapper">
 				<h1 class="ship-title">Select your first ship</h1>
-				<h:form class="initial-ship">
-					<h:selectOneMenu id="ship" value="#{initialShip.choosenShip}">
-		              		<f:selectItem itemLabel="Ship" itemValue="" noSelectionOption="true" />
+				<h:form id="initial-ship-form">
+					<h:selectOneMenu class="ship" id="ship" value="#{initialShip.choosenShip}" required="true" requiredMessage="A ship is required.">
+		              		<f:selectItem itemLabel="Ship" itemValue="#{null}" noSelectionOption="true" />
 			                <f:selectItems value="#{initialShip.availableShips}"
 			                				var="ship"
 			                				itemValue="#{ship.id}"
 			                				itemLabel="#{ship.name}"/>
 			        </h:selectOneMenu>
-			        <h:selectOneRadio value="#{initialShip.typeOfBuy}"> 
-					   <f:selectItem itemValue="Stolen" itemLabel="Stolen" /> 
-					   <f:selectItem itemValue="Inherited" itemLabel="Inherited" />
+			        <h:selectOneRadio class="type-of-buy" value="#{initialShip.typeOfBuy}" required="true" requiredMessage="Type of buy is required."> 
+					   <f:selectItem itemValue="Stolen" itemLabel="Stolen"/> 
+					   <f:selectItem itemValue="Inherited" itemLabel="Inherited"/>
 					   <f:selectItem itemValue="Bought" itemLabel="Bought" />
 					</h:selectOneRadio>   
-			        <h:commandButton value="Get Ship" action="#{initialShip.getShip()}" />
+			        <h:commandButton class="form-button" value="Get Ship" action="#{initialShip.getShip()}" />
 				</h:form>
 			</div>
 		</div>

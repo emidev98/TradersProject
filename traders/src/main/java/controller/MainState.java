@@ -9,13 +9,4 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class MainState implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String disabled = "disabled";
-	
-	public String getDisabled() {
-		return disabled;
-	}
-	
-	public void setDisabled(String disabled) {
-		this.disabled = disabled;
-	}
 }
