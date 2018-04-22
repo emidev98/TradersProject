@@ -43,6 +43,7 @@ public class ChosePlanet implements Serializable {
     	initStay.setTrader(t);
     	initStay.setStartDate(t.getStartDate());
     	initStay.setEndDate(null);
+    	t.getStays().add(initStay);
     	try {
 			initStay.saveStay();
 		} catch (SQLException e) {
