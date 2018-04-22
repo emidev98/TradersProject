@@ -99,4 +99,12 @@ public class Stay {
 		session.save(this);
 		session.getTransaction().commit();
 	}
+	
+	public void updateStay() throws SQLException {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.update(this);
+		session.getTransaction().commit();
+	}
 }
