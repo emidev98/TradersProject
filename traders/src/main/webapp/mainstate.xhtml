@@ -25,6 +25,26 @@
 				actualContent = pageContent;
 				
 			}
+			
+			var byPlanetElement = document.getElementById("chose-by-planet");
+			var byGoodsElement  = document.getElementById("chose-by-goods");
+			
+			HTMLInputElementObject.addEventListener('input', function (event) {
+				console.log(event);
+				console.log(this);
+				if(this.value  === "planets"){
+					if((' ' + byPlanetElement.className + ' ').indexOf(" active ") > -1){
+						byGoodsElement.classList.remove("active");
+						byPlanetElement.classList.add("active");
+					}
+				}
+				else{
+					if((' ' + byGoodsElement.className + ' ').indexOf(" active ") > -1){
+						byPlanetElement.classList.remove("active");
+						byGoodsElement.classList.add("active");
+					}
+				}
+			});
 		</script>
     </h:head>
 	<h:body>
