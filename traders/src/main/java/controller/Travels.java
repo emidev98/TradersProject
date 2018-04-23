@@ -30,8 +30,8 @@ public class Travels implements Serializable{
 	private String planetId;
 	private Trader trader;
 	private Stay lastStay;
-	private String errorMsg;
-	
+	private String errorMsg = "";
+
 		
 	public void onSolarSystemChange(AjaxBehaviorEvent event) {
     	int id = Integer.parseInt(solarSystemId);
@@ -41,11 +41,11 @@ public class Travels implements Serializable{
 	public String createTravel() {
 		Stay newStay = new Stay();
     	if (!planetId.equals("")) {
-    		Calendar c = Calendar.getInstance();
 			int planetID = Integer.parseInt(planetId);
 	    	Planet planet = Planet.getPlanetById(planetID);
 	    	if (planet.getId() != lastStay.getPlanet().getId()) {
-		    	lastStay.setEndDate(endDate);  	
+	    		Calendar c = Calendar.getInstance();
+	    		lastStay.setEndDate(endDate);  	
 		    	newStay.setPlanet(planet);
 		    	newStay.setTrader(trader);
 		    	int days = lastStay.getPlanet().getTime(planet);
@@ -87,7 +87,6 @@ public class Travels implements Serializable{
 		solarSystems = SolarSystem.getAllSolarSystems();
 		findTrader();
 		findLastStay();
-		errorMsg = "";
 	}
 	public Date getEndDate() {
 		return endDate;

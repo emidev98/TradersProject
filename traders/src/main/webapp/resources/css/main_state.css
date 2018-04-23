@@ -44,6 +44,10 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    
+}
+.page-content .content-wrapper > h1 {
+	text-align: center;
 }
 
 .page-content .content-wrapper #travels,

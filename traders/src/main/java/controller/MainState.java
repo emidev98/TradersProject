@@ -41,5 +41,4 @@ public class MainState implements Serializable{
 		this.trader = trader;
 	}
 	
-	
 }
