@@ -32,7 +32,6 @@ public class Travels implements Serializable{
 	private Trader trader;
 	private Stay lastStay;
 	private Calendar c = Calendar.getInstance();
-	
 		
 	public void onSolarSystemChange(AjaxBehaviorEvent event) {
     	int id = Integer.parseInt(solarSystemId);
