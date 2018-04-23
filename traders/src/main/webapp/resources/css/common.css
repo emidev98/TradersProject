@@ -31,6 +31,18 @@ body{
 }
 
 
+/* Calendar */
+
+#ui-datepicker-div{
+	padding: 0;
+	width:19em;
+}
+
+#ui-datepicker-div .ui-datepicker-header{
+	padding: 0.5em;
+	
+}
+
 /* FONTS */
 @font-face {
   font-family: 'Raleway';
@@ -44,3 +56,4 @@ body{
 	font-family: Raleway !important;
 
 }
+
