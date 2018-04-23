@@ -28,10 +28,10 @@ public class Travels implements Serializable{
 	private SolarSystem solarSystem;
 	private String solarSystemId;
 	private String planetId;
-	private Date lastDate;
 	private Trader trader;
 	private Stay lastStay;
-	private Calendar c = Calendar.getInstance();
+	private String errorMsg = "";
+
 		
 	public void onSolarSystemChange(AjaxBehaviorEvent event) {
     	int id = Integer.parseInt(solarSystemId);
@@ -43,24 +43,32 @@ public class Travels implements Serializable{
     	if (!planetId.equals("")) {
 			int planetID = Integer.parseInt(planetId);
 	    	Planet planet = Planet.getPlanetById(planetID);
-	    	lastStay.setEndDate(endDate);  	
-	    	newStay.setPlanet(planet);
-	    	newStay.setTrader(trader);
-	    	int days = lastStay.getPlanet().getTime(planet);
-	    	c.setTime(endDate);
-	    	c.add(Calendar.DATE, days);
-	    	newStay.setStartDate(c.getTime());
-	    	newStay.setEndDate(null);
-	    	trader.getStays().add(newStay);
-	    	try {
-				lastStay.updateStay();
-				//newStay.saveStay();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	    	if (planet.getId() != lastStay.getPlanet().getId()) {
+	    		Calendar c = Calendar.getInstance();
+	    		lastStay.setEndDate(endDate);  	
+		    	newStay.setPlanet(planet);
+		    	newStay.setTrader(trader);
+		    	int days = lastStay.getPlanet().getTime(planet);
+		    	c.setTime(endDate);
+		    	c.add(Calendar.DATE, days);
+		    	newStay.setStartDate(c.getTime());
+		    	newStay.setEndDate(null);
+		    	trader.getStays().add(newStay);
+		    	try {
+					lastStay.updateStay();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	    	} else {
+	    		errorMsg = "El planeta seleccionat es el mateix on estaves!";
+	    		System.out.println(errorMsg);
+	    	}
+    	} else {
+    		errorMsg = "No has seleccionat planeta de desti!";
     	}
 		return "mainstate.xhtml";
 	}
+	
 	
 	public void findTrader() {
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
@@ -79,16 +87,6 @@ public class Travels implements Serializable{
 		solarSystems = SolarSystem.getAllSolarSystems();
 		findTrader();
 		findLastStay();
-    	c.setTime(lastStay.getStartDate());
-    	c.add(Calendar.DATE, 1);
-		lastDate = c.getTime();
-	}
-	
-	public Date getLastDate() {
-		return lastDate;
-	}
-	public void setLastDate(Date lastDate) {
-		this.lastDate = lastDate;
 	}
 	public Date getEndDate() {
 		return endDate;
@@ -126,5 +124,10 @@ public class Travels implements Serializable{
 	public void setSolarSystems(List<SolarSystem> solarSystems) {
 		this.solarSystems = solarSystems;
 	}
-	
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
 }
