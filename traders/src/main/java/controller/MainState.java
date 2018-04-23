@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -23,6 +24,10 @@ public class MainState implements Serializable{
     	Map<String, Object> requestMap = external.getSessionMap();
     	trader = (Trader) requestMap.get("trader");
     	actualDate = trader.getStartDate();
+    	Calendar c = Calendar.getInstance();
+    	c.setTime(actualDate);
+    	c.add(Calendar.DATE, 1);
+    	actualDate = c.getTime();
 	}
 
 	public Date getActualDate() {
