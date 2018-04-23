@@ -69,6 +69,17 @@ public class Good {
 		}
 		return prices;
 	}
+	
+	public static List<Good> getAllGoods() {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Good> goods = session.createQuery("from Good").getResultList();
+		session.getTransaction().commit();
+		return goods;
+	}
+	
 	/*
 	 * SELECT *
 	 * 	FROM PriceChanges pc
