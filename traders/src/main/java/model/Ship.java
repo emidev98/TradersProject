@@ -133,7 +133,7 @@ public class Ship {
 		availableShip = session.createQuery(
 					"FROM Ship as ship "
 				+ "WHERE ship.id NOT IN ("
-				+ "SELECT owner.ship.id FROM ShipOwner as owner WHERE owner.adquisitionDate <= '"+date+"' AND owner.lostCause LIKE 'Destroyed')").getResultList();
+				+ "SELECT owner.ship.id FROM ShipOwner as owner WHERE (owner.adquisitionDate <= '"+date+"' AND owner.lostCause LIKE 'Destroyed') OR owner.adquisitionDate = '"+date+"')").getResultList();
 		session.getTransaction().commit();
 		return availableShip;
 	}
