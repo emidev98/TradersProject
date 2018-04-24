@@ -61,6 +61,11 @@ public class Travels implements Serializable{
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+		    	Calendar compareDate = Calendar.getInstance();
+		    	compareDate.set(2500, 0, 1, 0, 0);
+		    	if (c.getTime().compareTo(compareDate.getTime()) >= 0)
+		    		return "finishtravel.xhtml";
+		    	
 	    	}
     	}
 		return "mainstate.xhtml";
