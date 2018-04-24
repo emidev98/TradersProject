@@ -17,6 +17,7 @@ import org.primefaces.event.SelectEvent;
 
 import model.Ship;
 import model.ShipOwner;
+import model.Stay;
 import model.Trader;
 
 @ManagedBean
@@ -43,7 +44,12 @@ public class Ships implements Serializable{
 		actualTrader = (Trader) requestMap.get("trader");
     	mainState = (MainState) requestMap.get("mainState");
     	shipsToSell = actualTrader.getTraderShips();
-    	lastStayDate = actualTrader.getLastStay().getEndDate();
+    	Stay lastStay = actualTrader.getLastStay();
+    	if(lastStay == null) {
+    		lastStayDate = actualTrader.getStartDate();
+    	} else {
+    		lastStayDate = actualTrader.getLastStay().getEndDate();
+    	}
 	}
 	
 	public void onDateSelect(SelectEvent event) {

@@ -135,8 +135,13 @@ public class Trader {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		Stay lastStay = (Stay) session.createQuery("from Stay as stay WHERE stay.trader.id = "+ this.getId() +" AND stay.endDate IS NOT NULL ORDER BY stay.endDate DESC LIMIT 1").getSingleResult();
+		@SuppressWarnings("unchecked")
+		List<Stay> lastStays = session.createQuery("from Stay as stay WHERE stay.trader.id = "+ this.getId() +" AND stay.endDate IS NOT NULL ORDER BY stay.endDate DESC").getResultList();
 		session.getTransaction().commit();
+		Stay lastStay = null;
+		if(lastStays.size() != 0) {
+			lastStay = lastStays.get(0);
+		}
 		return lastStay;
 	}
 	
