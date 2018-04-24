@@ -25,7 +25,7 @@
 			<div class="ship-managment-wrapper">
 				<div id="buy" class="active-type">
 					<div class="buy-ship-wrapper">
-						<h:form id="initial-ship-form">
+						<h:form id="buy-ship-form">
 							<p:calendar class="start-date" 
 								p:placeholder="Date"
 								required="true"
@@ -60,8 +60,36 @@
 					</div>
 				</div>
 				<div id="sell">
-					<div>
-					<h1>Sell</h1>
+					<div class="sell-ship-wrapper">
+						<h:form id="sell-ship-form">
+							<p:calendar class="start-date" 
+								p:placeholder="Date"
+								required="true"
+								requiredMessage="This date is required."
+								value="#{ships.managmentDateSell}"
+								mindate="#{ships.lastStayDate}"
+								maxdate="01/01/2500"
+								pattern="MM/dd/yyyy"
+								navigator="true" 
+								yearRange="2200:2500"/>
+							
+							<h:selectOneMenu class="ship" id="ship" value="#{ships.choosenShipSell}" required="true" requiredMessage="A ship is required.">
+			              		<f:selectItem itemLabel="Ship" itemValue="#{null}" noSelectionOption="true" />
+				                <f:selectItems value="#{ships.shipsToSell}"
+				                				var="ship"
+				                				itemValue="#{ship.id}"
+				                				itemLabel="#{ship.name}"/>
+					        </h:selectOneMenu>
+					        
+					        <h:inputText value="#{ships.priceSell}" />
+					        
+					        <h:selectOneRadio class="type-of-buy" value="#{ships.typeOfSell}" required="true" requiredMessage="Type of buy is required."> 
+							   <f:selectItem itemValue="Stolen" itemLabel="Stolen"/> 
+							   <f:selectItem itemValue="Inherited" itemLabel="Inherited"/>
+							   <f:selectItem itemValue="Bought" itemLabel="Bought" />
+							</h:selectOneRadio>   
+					        <h:commandButton class="form-button" value="Get Ship" action="#{ships.buyShip()}" />
+						</h:form>
 					</div>
 				</div>
 			</div>
