@@ -80,3 +80,14 @@ body{
 	display: flex !important;	
 	
 }
+
+.retire-trader-button {
+	height: 45px;
+	width: 150px;
+	padding: 0;
+	border: 1px solid gray;
+	border-radius: 1px;
+	margin: 0 1em;
+	cursor: pointer;
+	color: red;
+}

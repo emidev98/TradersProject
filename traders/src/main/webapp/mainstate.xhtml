@@ -32,7 +32,10 @@
 			<div class="menu-items">
 				<button onclick="show('travels')">Travels</button>
 				<button onclick="show('ships')" >Ships Management</button>
-				<button onclick="show('goods')">Search goods</button>
+				<button onclick="show('goods')">Search Goods</button>
+				<h:form>
+					<h:commandButton class="action-button retire-trader-button" value="Retire Trader" action="#{mainState.retireTrader()}" />
+				</h:form>
 			</div>
 		</div>
 		

@@ -46,4 +46,7 @@ public class MainState implements Serializable{
 		this.trader = trader;
 	}
 	
+	public String retireTrader() {
+		return "finishtravel.xhtml";
+	}
 }
