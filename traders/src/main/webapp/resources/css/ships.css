@@ -1,0 +1,16 @@
+.buttons-of-type{
+	display:flex;
+	justify-content:center;
+	
+}
+
+.ship-managment-wrapper #buy,
+.ship-managment-wrapper #sell{
+	display: none;
+    max-height: 600px;
+}
+
+.ship-managment-wrapper .active-type{
+	display: flex !important;	
+
+}

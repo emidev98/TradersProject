@@ -22,6 +22,7 @@ public class InitialShip {
 	private List<Ship> availableShips;
 	private String choosenShip;
 	private String typeOfBuy;
+	private MainState mainState;
 	
 	public InitialShip() {
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
