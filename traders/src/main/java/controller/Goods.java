@@ -1,73 +1,76 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import model.Planet;
-import model.SolarSystem;
+import org.primefaces.event.SelectEvent;
+
+import model.Good;
 
 @ManagedBean
 @SessionScoped
 public class Goods implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private List<SolarSystem> solarSystems;
-	private List<Planet> planets;
-	private SolarSystem solarSystem;
-	private String solarSystemId;
-	private String planetId;
 	
-	public void onSolarSystemChange(AjaxBehaviorEvent event) {
-    	int id = Integer.parseInt(solarSystemId);
-    	solarSystem = SolarSystem.getSolarSystemById(id);
-    	planets = solarSystem.getPlanets();
+	private List<Good> goods;
+	private Good good;
+	private String goodId;
+	private Date fromDate;
+	
+	public void onGoodChangeListener(AjaxBehaviorEvent event) {
+		for (Good good : goods) {
+			if(good.getId() == Integer.parseInt(goodId)) {
+				this.good = good;
+			}
+		}
+		System.out.println("onListener -> " + good);
 	}
 	
-	// Getters, Setters and Constructor
+	public void onDateSelectedListener(SelectEvent event) {
+		System.out.println(fromDate);
+	}
+	
+	//Getters, setters and constructor
 	public Goods() {
-		solarSystems = SolarSystem.getAllSolarSystems();
+		goods = Good.getAllGoods();
 	}
+
+	public List<Good> getGoods() {
+		return goods;
+	}
+
+	public void setGoods(List<Good> goods) {
+		this.goods = goods;
+	}
+
+	public Good getGood() {
+		return good;
+	}
+
+	public void setGood(Good good) {
+		this.good = good;
+	}
+
+	public String getGoodId() {
+		return goodId;
+	}
+
+	public void setGoodId(String goodId) {
+		this.goodId = goodId;
+	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
 	
-	public String getSolarSystemId() {
-		return solarSystemId;
-	}
-
-	public void setSolarSystemId(String solarSystemId) {
-		this.solarSystemId = solarSystemId;
-	}
-
-	public List<SolarSystem> getSolarSystems() {
-		return solarSystems;
-	}
-
-	public void setSolarSystems(List<SolarSystem> solarSystems) {
-		this.solarSystems = solarSystems;
-	}
-
-	public List<Planet> getPlanets() {
-		return planets;
-	}
-
-	public void setPlanets(List<Planet> planets) {
-		this.planets = planets;
-	}
-
-	public SolarSystem getSolarSystem() {
-		return solarSystem;
-	}
-
-	public void setSolarSystem(SolarSystem solarSystem) {
-		this.solarSystem = solarSystem;
-	}
-
-	public String getPlanetId() {
-		return planetId;
-	}
-
-	public void setPlanetId(String planetId) {
-		this.planetId = planetId;
-	}
 }

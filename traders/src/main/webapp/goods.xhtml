@@ -4,50 +4,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
 	  xmlns:p="http://primefaces.org/ui">
     <body>
 	    <ui:composition>
-	    	<div>
-				Find by ?
-				<form id="searchBy">
-				    <input type="radio" name="option" value="planets" /> Planets name
-				    <input type="radio" name="option" value="goods" /> Goods name
-				</form>
-	    	</div>
-			<h:form id="chose-by-planet">
-				<div class="solar-systems">
-					<h2>Select SolarSystem</h2>
-					<h:selectOneMenu id="solarsystem"
-		            		value="#{goods.solarSystemId}">
-                		<f:selectItem itemLabel="SolarSystem" itemValue="" noSelectionOption="true" />
-	        			<p:ajax process="solarsystem"
+			<h:form class="chose-good">
+				<div class="select-good">
+					<h2>Select Good</h2>
+					<h:selectOneMenu id="goods-selector"
+		            		value="#{goods.goodId}">
+                		<f:selectItem itemLabel="Good" itemValue="" noSelectionOption="true" />
+	        			<p:ajax process="goods-selector"
 	        					event="change" 
-	        					listener="#{goods.onSolarSystemChange}" 
-	        					update="planet"/>
-		                <f:selectItems value="#{goods.solarSystems}"
-		                			var="solarSystem"
-		                			itemValue="#{solarSystem.id}"
-		                			itemLabel="#{solarSystem.name}" />
+	        					listener="#{goods.onGoodChangeListener}" 
+	        					update="goodsContent"/>
+		                <f:selectItems value="#{goods.goods}"
+		                			var="goodsValues"
+		                			itemValue="#{goodsValues.id}"
+		                			itemLabel="#{goodsValues.name}" />
 		            </h:selectOneMenu>
 				</div>
-	            <div class="planets">
-					<h2>Select Planet</h2>
-		            <h:selectOneMenu id="planet" value="#{goods.planetId}">
-               			<f:selectItem itemLabel="Planet" itemValue="" noSelectionOption="true" />
-		                <f:selectItems value="#{goods.planets}"
-		                				var="planet"
-		                				itemValue="#{planet.id}"
-		                				itemLabel="#{planet.name}"/>
-		            </h:selectOneMenu>
-	            </div>
-	            <div class="create-stay">
-					<h:commandButton class="create-stay-button action-button" value="Create Stay" action="#{goods.createStay()}" />
-	            </div>
 			</h:form>
-			<h:form id="chose-by-goods">
-			by goods name
-			</h:form>
+			<p:calendar id="from-date" 
+					p:placeholder="Date 'from' to search"
+					required="true"
+					requiredMessage="Date required."
+					value="#{goods.fromDate}"
+					mindate="01/01/2200"
+					maxdate="12/31/2499"
+					pattern="MM/dd/yyyy"
+					navigator="true" 
+					yearRange="2200:2499">
+				<p:ajax event="dateSelect" 
+      					listener="#{goods.onDateSelectedListener}" 
+      					update="goodsContent"/>
+			</p:calendar>
+			<h:form id="goodsContent">#{goods.good}</h:form>
 	    </ui:composition>
     </body>
 </html>

@@ -2,6 +2,7 @@ package model;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -25,7 +26,7 @@ import dao.HibernateUtil;
 @Entity
 @Table(name = "Goods")
 public class Good {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
@@ -50,7 +51,13 @@ public class Good {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Map<Planet, Double> getPrices(LocalDate date){
+	
+	@Override
+	public String toString() {
+		return "Good [id=" + id + ", name=" + name + "]";
+	}
+
+	public Map<Planet, Double> getPrices(Date date){
 		TreeMap<Planet, Double> prices = new TreeMap<>();
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
@@ -72,6 +79,17 @@ public class Good {
 		}
 		return prices;
 	}
+	
+	public static List<Good> getAllGoods() {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Good> goods = session.createQuery("from Good").getResultList();
+		session.getTransaction().commit();
+		return goods;
+	}
+
 	/*
 	 * SELECT *
 	 * 	FROM PriceChanges pc
