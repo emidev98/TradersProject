@@ -17,7 +17,7 @@
 							requiredMessage="This date is required."
 							value="#{travels.endDate}"
 							mindate="#{mainState.actualDate}"
-							maxdate="01/01/2500"
+							maxdate="01/01/2600"
 							pattern="MM/dd/yyyy"
 							navigator="true" 
 							yearRange="2200:2500"/>
@@ -51,9 +51,6 @@
 					<h:commandButton class="create-travel-button action-button" value="Create Travel" action="#{travels.createTravel()}" />
 	            </div>
 			</h:form>
-			<div>
-            	<h1>#{travels.errorMsg}</h1>
-            </div>
 	    </ui:composition>
     </body>
 </html>

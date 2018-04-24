@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -125,7 +126,9 @@ public class Ship {
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<Ship> getAvailableShips(Date date){
-		//SELECT DISTINCT ships.* FROM ships WHERE ships.Id NOT IN (SELECT ShipOwner.ShipId FROM ShipOwners WHERE shipowners.AdquisitionDate <= "2266-07-05" AND ShipOwners.LostBenefit LIKE 'Destroyed');
+		//SELECT DISTINCT ships.* FROM ships WHERE ships.Id NOT IN (SELECT ShipOwners.ShipId FROM ShipOwners WHERE (ShipOwners.AdquisitionDate <= "2438-01-01" AND ShipOwners.LostCause LIKE 'Destroyed') OR (ShipOwners.AdquisitionDate <= "2438-01-01" AND ShipOwners.LostDate IS NULL));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String yyyyMMdd = sdf.format(date);
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
@@ -133,7 +136,7 @@ public class Ship {
 		availableShip = session.createQuery(
 					"FROM Ship as ship "
 				+ "WHERE ship.id NOT IN ("
-				+ "SELECT owner.ship.id FROM ShipOwner as owner WHERE (owner.adquisitionDate <= '"+date+"' AND owner.lostCause LIKE 'Destroyed') OR owner.adquisitionDate = '"+date+"')").getResultList();
+				+ "SELECT owner.ship.id FROM ShipOwner as owner WHERE (owner.adquisitionDate <= '"+yyyyMMdd+"' AND owner.lostCause LIKE 'Destroyed') OR (owner.adquisitionDate <= '"+yyyyMMdd+"' AND owner.lostDate IS NULL))").getResultList();
 		session.getTransaction().commit();
 		return availableShip;
 	}

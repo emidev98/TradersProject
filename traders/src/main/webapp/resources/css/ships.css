@@ -1,0 +1,45 @@
+.buttons-of-type{
+	display:flex;
+	justify-content:center;
+	margin: 1em;
+}
+
+.buttons-of-type button{
+	margin: 1em;
+}
+
+.ship-managment-wrapper #buy,
+.ship-managment-wrapper #sell{
+	display: none;
+    max-height: 600px;
+}
+
+.ship-managment-wrapper .active-type{
+	display: flex !important;	
+
+}
+
+.buy-ship-wrapper {
+	width: 100%;
+}
+
+.buy-ship-wrapper #initial-ship-form {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: 40% 20% 40%;
+	width: 100%;
+	justify-items: center;
+	align-items: center;
+}
+
+.buy-ship-wrapper #initial-ship-form .type-of-buy{
+	grid-column: 2;
+	grid-row: 2;
+	margin-bottom: 1em;
+}
+
+.buy-ship-wrapper #initial-ship-form .form-button {
+	grid-column: 2;
+	grid-row: 3;
+}
+

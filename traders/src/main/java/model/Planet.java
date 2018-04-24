@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -177,6 +178,8 @@ public class Planet {
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String yyyyMMdd = sdf.format(date);
 		@SuppressWarnings("unchecked")
 		List<PriceChange> priceChanges = session.createQuery("from PriceChange pc "
 				+ "WHERE pc.PlanetId = " + this.getId() 
@@ -185,7 +188,7 @@ public class Planet {
 						+ " FROM PriceChange pcs"
 						+ " WHERE pcs.PlanetId = " + this.getId()
 						+ " AND pcs.GoodId = pc.GoodId"
-						+ " AND pcs.Date <= \"" + date.toString() + "\");").getResultList();
+						+ " AND pcs.Date <= \"" + yyyyMMdd + "\");").getResultList();
 		session.getTransaction().commit();
 		for (PriceChange pc: priceChanges) {
 			goods.put(pc.getGood(), pc.getNewPrice());

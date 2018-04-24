@@ -30,7 +30,7 @@ public class Travels implements Serializable{
 	private String planetId;
 	private Trader trader;
 	private Stay lastStay;
-	private String errorMsg = "";
+	private MainState mainState;
 
 		
 	public void onSolarSystemChange(AjaxBehaviorEvent event) {
@@ -54,17 +54,19 @@ public class Travels implements Serializable{
 		    	newStay.setStartDate(c.getTime());
 		    	newStay.setEndDate(null);
 		    	trader.getStays().add(newStay);
+		    	c.add(Calendar.DATE, 1);
+		    	mainState.setActualDate(c.getTime());
 		    	try {
 					lastStay.updateStay();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-	    	} else {
-	    		errorMsg = "El planeta seleccionat es el mateix on estaves!";
-	    		System.out.println(errorMsg);
+		    	Calendar compareDate = Calendar.getInstance();
+		    	compareDate.set(2500, 0, 1, 0, 0);
+		    	if (c.getTime().compareTo(compareDate.getTime()) >= 0)
+		    		return "finishtravel.xhtml";
+		    	
 	    	}
-    	} else {
-    		errorMsg = "No has seleccionat planeta de desti!";
     	}
 		return "mainstate.xhtml";
 	}
@@ -74,6 +76,12 @@ public class Travels implements Serializable{
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
     	Map<String, Object> requestMap = external.getSessionMap();
     	trader = (Trader) requestMap.get("trader");
+	}
+	
+	public void findMainState() {
+		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
+    	Map<String, Object> requestMap = external.getSessionMap();
+    	mainState = (MainState) requestMap.get("mainState");
 	}
 	
 	public void findLastStay() {
@@ -87,6 +95,7 @@ public class Travels implements Serializable{
 		solarSystems = SolarSystem.getAllSolarSystems();
 		findTrader();
 		findLastStay();
+		findMainState();
 	}
 	public Date getEndDate() {
 		return endDate;
@@ -123,11 +132,5 @@ public class Travels implements Serializable{
 	}
 	public void setSolarSystems(List<SolarSystem> solarSystems) {
 		this.solarSystems = solarSystems;
-	}
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
 	}
 }
