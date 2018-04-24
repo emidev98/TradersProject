@@ -136,4 +136,12 @@ public class Trader {
 		session.getTransaction().commit();
 	}
 	
+	public boolean verify() {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		List<Trader> traders = session.createQuery("FROM Traders WHERE Nickname LIKE \"" + this.nickname + "\";").getResultList();
+		return (traders.size() == 0 ? true : false);
+	}
+	
 }
