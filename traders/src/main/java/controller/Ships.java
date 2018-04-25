@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.event.SelectEvent;
 
@@ -25,11 +26,11 @@ import model.Trader;
 public class Ships implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private List<Ship> shipsToBuy;
-	private List<Ship> shipsToSell;
+	private List<ShipOwner> shipsToSell;
 	private Trader actualTrader;
 	private String typeOfBuy;
 	private String typeOfSell;
-	private Date lastStayDate;
+	private Date dateOfShip;
 	private Date managmentDate;
 	private Date managmentDateSell;
 	private String choosenShip;
@@ -37,6 +38,7 @@ public class Ships implements Serializable{
 	private double price;
 	private double priceSell;
 	private MainState mainState;
+	private ShipOwner shipChoosedToSell;
 	
 	public Ships() {
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
@@ -44,12 +46,7 @@ public class Ships implements Serializable{
 		actualTrader = (Trader) requestMap.get("trader");
     	mainState = (MainState) requestMap.get("mainState");
     	shipsToSell = actualTrader.getTraderShips();
-    	Stay lastStay = actualTrader.getLastStay();
-    	if(lastStay == null) {
-    		lastStayDate = actualTrader.getStartDate();
-    	} else {
-    		lastStayDate = actualTrader.getLastStay().getEndDate();
-    	}
+    	dateOfShip = mainState.getActualDate();
 	}
 	
 	public void onDateSelect(SelectEvent event) {
@@ -63,6 +60,30 @@ public class Ships implements Serializable{
 		System.out.println(i);
 	}
 	
+	public void onShipToSellSelected(AjaxBehaviorEvent event) {
+		int idOwner= Integer.parseInt(choosenShipSell);
+		for(ShipOwner actualShipOwner: shipsToSell) {
+			if(idOwner == actualShipOwner.getId()) {
+				shipChoosedToSell = actualShipOwner;
+			}
+		}
+		System.out.println(shipChoosedToSell);
+		dateOfShip = shipChoosedToSell.getAdquisitionDate();
+	}
+	
+	public String sellShip() {
+		shipChoosedToSell.setLostCause(typeOfSell);
+		shipChoosedToSell.setLostDate(managmentDateSell);
+		shipChoosedToSell.setLostBenefit(priceSell);
+		mainState.setActualDate(managmentDateSell);
+		try {
+			shipChoosedToSell.updateShipOwner();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "mainstate.xhtml";
+	}
+	
 	public String buyShip(){
 		ShipOwner newShipOwner = new ShipOwner();
 		Ship choosenShip = Ship.getShipById(Integer.parseInt(this.choosenShip));
@@ -74,13 +95,13 @@ public class Ships implements Serializable{
 		newShipOwner.setLostCause("");
 		newShipOwner.setLostBenefit(0);
 		newShipOwner.setLostDate(null);
-		actualTrader.getShipOwner().add(newShipOwner);
 		mainState.setActualDate(managmentDate);
 		try {
 			newShipOwner.saveShipOwner();
 		} catch (SQLException e) {
 			;
 		}
+		actualTrader.getShipOwner().add(newShipOwner);
 		return "mainstate.xhtml";
 	}
 
@@ -92,11 +113,11 @@ public class Ships implements Serializable{
 		this.shipsToBuy = shipsToBuy;
 	}
 
-	public List<Ship> getShipsToSell() {
+	public List<ShipOwner> getShipsToSell() {
 		return shipsToSell;
 	}
 
-	public void setShipsToSell(List<Ship> shipsToSell) {
+	public void setShipsToSell(List<ShipOwner> shipsToSell) {
 		this.shipsToSell = shipsToSell;
 	}
 
@@ -172,13 +193,12 @@ public class Ships implements Serializable{
 		this.typeOfSell = typeOfsell;
 	}
 
-	public Date getLastStayDate() {
-		return lastStayDate;
+	public Date getDateOfShip() {
+		return dateOfShip;
 	}
 
-	public void setLastStayDate(Date lastStayDate) {
-		this.lastStayDate = lastStayDate;
+	public void setDateOfShip(Date dateOfShip) {
+		this.dateOfShip = dateOfShip;
 	}
-	
 	
 }

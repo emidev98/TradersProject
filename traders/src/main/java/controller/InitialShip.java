@@ -47,7 +47,6 @@ public class InitialShip {
 		initShip.setLostCause("");
 		initShip.setLostDate(null);
 		initShip.setLostBenefit(0);
-		actualTrader.getShipOwner().add(initShip);
 		System.out.println(initShip);
 		
 		try {
@@ -55,6 +54,7 @@ public class InitialShip {
 		} catch (SQLException e) {
 			;
 		}
+		actualTrader.getShipOwner().add(initShip);
 		return "mainstate.xhtml";
 	}
 

@@ -134,12 +134,29 @@ public class ShipOwner {
 		return "ShipOwner [ship=" + ship + ", trader=" + trader + ", adquisitionDate=" + adquisitionDate
 				+ ", adquisitionCause=" + adquisitionCause + ", adquisitionPrice=" + adquisitionPrice + "]";
 	}
+	
+	public static ShipOwner getShipOwnerById(int id) {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		ShipOwner ship = session.get(ShipOwner.class, id);
+		session.getTransaction().commit();
+		return ship;
+	}
 
 	public void saveShipOwner() throws SQLException{
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		session.save(this);
+		session.getTransaction().commit();
+	}
+	
+	public void updateShipOwner() throws SQLException {
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.update(this);
 		session.getTransaction().commit();
 	}
 	

@@ -153,12 +153,13 @@ public class Trader {
 		session.getTransaction().commit();
 	}
 	
-	public List<Ship> getTraderShips() {
-		List<Ship> shipsOfTrader = new ArrayList<>();
+	public List<ShipOwner> getTraderShips() {
+		List<ShipOwner> shipsOfTrader = new ArrayList<>();
 		List<ShipOwner> shipOwners = this.getShipOwner();
 		for(ShipOwner actualShipOwner : shipOwners) {
 			if(actualShipOwner.getLostDate() == null) {
-				shipsOfTrader.add(actualShipOwner.getShip());
+				shipsOfTrader.add(actualShipOwner);
+				System.out.println(actualShipOwner.getId());
 			}
 		}
 		return shipsOfTrader;
