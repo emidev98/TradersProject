@@ -25,7 +25,7 @@
 			<div class="ship-managment-wrapper">
 				<div id="buy" class="active-type">
 					<div class="buy-ship-wrapper">
-						<h:form id="initial-ship-form">
+						<h:form id="buy-ship-form">
 							<p:calendar class="start-date" 
 								p:placeholder="Date"
 								required="true"
@@ -60,8 +60,44 @@
 					</div>
 				</div>
 				<div id="sell">
-					<div>
-					<h1>Sell</h1>
+					<div class="sell-ship-wrapper">
+						<h:form id="sell-ship-form">
+							
+							
+							<h:selectOneMenu class="ship" id="ship" value="#{ships.choosenShipSell}" required="true" requiredMessage="A ship is required.">
+			              		<f:selectItem itemLabel="Ship" itemValue="#{null}" noSelectionOption="true" />
+				                <f:selectItems value="#{ships.shipsToSell}"
+				                				var="ship"
+				                				itemValue="#{ship.id}"
+				                				itemLabel="#{ship.ship.name}"/>
+				               	<p:ajax
+		        					event="change" 
+		        					listener="#{ships.onShipToSellSelected}" 
+		        					update="sellCalendar"/>
+					        </h:selectOneMenu>
+					        
+					        <p:calendar class="start-date"
+					        	id="sellCalendar" 
+								p:placeholder="Date"
+								required="true"
+								requiredMessage="This date is required."
+								value="#{ships.managmentDateSell}"
+								mindate="#{ships.dateOfShip}"
+								maxdate="01/01/2500"
+								pattern="MM/dd/yyyy"
+								navigator="true" 
+								yearRange="2200:2500"/>
+								
+					        <h:inputText value="#{ships.priceSell}" />
+					        
+					        <h:selectOneRadio class="type-of-sell" value="#{ships.typeOfSell}" required="true" requiredMessage="Type of sell is required."> 
+							   <f:selectItem itemValue="Stolen" itemLabel="Stolen"/> 
+							   <f:selectItem itemValue="Inherited" itemLabel="Inherited"/>
+							   <f:selectItem itemValue="Bought" itemLabel="Bought" />
+							   <f:selectItem itemValue="Destroyed" itemLabel="Destroyed" />
+							</h:selectOneRadio>   
+					        <h:commandButton class="form-button" value="Lose Ship" action="#{ships.sellShip()}" />
+						</h:form>
 					</div>
 				</div>
 			</div>

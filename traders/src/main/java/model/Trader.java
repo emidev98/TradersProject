@@ -2,6 +2,7 @@ package model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -52,10 +53,11 @@ public class Trader {
 	private List<Stay> stays;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="trader", cascade={CascadeType.ALL})
-	private List<ShipOwner> shipOwner;
+	private List<ShipOwner> shipOwners;
 	
 	public Trader() {
 		stays = new ArrayList<>();
+		shipOwners = new ArrayList<>();
 	}
 
 	public String getNickname() {
@@ -115,11 +117,11 @@ public class Trader {
 	}
 
 	public List<ShipOwner> getShipOwner() {
-		return shipOwner;
+		return shipOwners;
 	}
 
 	public void setShipOwner(List<ShipOwner> shipOwner) {
-		this.shipOwner = shipOwner;
+		this.shipOwners = shipOwner;
 	}
 
 	@Override
@@ -128,12 +130,39 @@ public class Trader {
 				+ ", startDate=" + startDate + ", defunctDate=" + defunctDate + "]";
 	}
 	
+	public Stay getLastStay() {
+		//SELECT * FROM stays WHERE stays.TraderId = 53 AND stays.EndDate IS NOT NULL ORDER BY stays.EndDate DESC LIMIT 1;
+		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Stay> lastStays = session.createQuery("from Stay as stay WHERE stay.trader.id = "+ this.getId() +" AND stay.endDate IS NOT NULL ORDER BY stay.endDate DESC").getResultList();
+		session.getTransaction().commit();
+		Stay lastStay = null;
+		if(lastStays.size() != 0) {
+			lastStay = lastStays.get(0);
+		}
+		return lastStay;
+	}
+	
 	public void saveTrader() throws SQLException{
 		SessionFactory factory = HibernateUtil.getInstance().getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		session.save(this);
 		session.getTransaction().commit();
+	}
+	
+	public List<ShipOwner> getTraderShips() {
+		List<ShipOwner> shipsOfTrader = new ArrayList<>();
+		List<ShipOwner> shipOwners = this.getShipOwner();
+		for(ShipOwner actualShipOwner : shipOwners) {
+			if(actualShipOwner.getLostDate() == null) {
+				shipsOfTrader.add(actualShipOwner);
+				System.out.println(actualShipOwner.getId());
+			}
+		}
+		return shipsOfTrader;
 	}
 	
 }

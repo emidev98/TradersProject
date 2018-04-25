@@ -45,13 +45,16 @@ public class InitialShip {
 		initShip.setAdquisitionCause(typeOfBuy);
 		initShip.setAdquisitionPrice(price);
 		initShip.setLostCause("");
+		initShip.setLostDate(null);
 		initShip.setLostBenefit(0);
 		System.out.println(initShip);
+		
 		try {
 			initShip.saveShipOwner();
 		} catch (SQLException e) {
 			;
 		}
+		actualTrader.getShipOwner().add(initShip);
 		return "mainstate.xhtml";
 	}
 
