@@ -38,6 +38,7 @@ public class Ships implements Serializable{
 	private double priceSell;
 	private MainState mainState;
 	private ShipOwner shipChoosedToSell;
+	private boolean disable = false;
 	
 	public Ships() {
 		ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
@@ -46,6 +47,9 @@ public class Ships implements Serializable{
     	mainState = (MainState) requestMap.get("mainState");
     	shipsToSell = actualTrader.getTraderShips();
     	dateOfShip = mainState.getActualDate();
+    	if(shipsToSell.size() <= 1) {
+    		disable = true;
+    	}
 	}
 	
 	public void onDateSelect(SelectEvent event) {
@@ -199,5 +203,14 @@ public class Ships implements Serializable{
 	public void setDateOfShip(Date dateOfShip) {
 		this.dateOfShip = dateOfShip;
 	}
+
+	public boolean isDisable() {
+		return disable;
+	}
+
+	public void setDisable(boolean disable) {
+		this.disable = disable;
+	}
+
 	
 }

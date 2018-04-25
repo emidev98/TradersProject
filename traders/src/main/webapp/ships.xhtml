@@ -20,7 +20,7 @@
 			</script>
 			<div class="buttons-of-type">
 				<button onclick="typeOfManagment('buy')">Buy</button>
-				<button onclick="typeOfManagment('sell')" >Sell</button>
+				<button onclick="typeOfManagment('sell')">Sell</button>
 			</div>
 			<div class="ship-managment-wrapper">
 				<div id="buy" class="active-type">
@@ -55,7 +55,7 @@
 							   <f:selectItem itemValue="Inherited" itemLabel="Inherited"/>
 							   <f:selectItem itemValue="Bought" itemLabel="Bought" />
 							</h:selectOneRadio>   
-					        <h:commandButton class="form-button" value="Get Ship" action="#{ships.buyShip()}" />
+					        <h:commandButton  class="form-button" value="Get Ship" action="#{ships.buyShip()}" />
 						</h:form>
 					</div>
 				</div>
@@ -96,7 +96,7 @@
 							   <f:selectItem itemValue="Bought" itemLabel="Bought" />
 							   <f:selectItem itemValue="Destroyed" itemLabel="Destroyed" />
 							</h:selectOneRadio>   
-					        <h:commandButton class="form-button" value="Lose Ship" action="#{ships.sellShip()}" />
+					        <h:commandButton disabled="#{ships.disable}"  class="form-button" value="Lose Ship" action="#{ships.sellShip()}" />
 						</h:form>
 					</div>
 				</div>
